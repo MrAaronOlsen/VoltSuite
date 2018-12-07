@@ -1,7 +1,6 @@
-class Convert
-
+module VoltMath
   class << self
-
+    
     def radian(degree)
       degree * (Math::PI/180)
     end
@@ -10,5 +9,4 @@ class Convert
       radian * (180/Math::PI)
     end
   end
-
 end

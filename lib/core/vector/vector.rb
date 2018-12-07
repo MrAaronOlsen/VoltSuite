@@ -13,7 +13,7 @@ class Vector
 
     # Makes a unit vector based on the given angle (in degrees)
     def from_angle(degree)
-      radian = Convert.radian(degree)
+      radian = VoltMath.radian(degree)
       Vector.new(Math.cos(radian), Math.sin(radian))
     end
 
@@ -138,7 +138,7 @@ class Vector
 
   # Rotate self by some degree around origin
   def rotate(degree)
-    radian = Convert.radian(degree)
+    radian = VoltMath.radian(degree)
 
     x = @x
     cos = Math.cos(radian)
