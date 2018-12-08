@@ -1,8 +1,8 @@
 RSpec.describe Clip do
 
   it "find contact loc case one" do
-    ref = Edge.new(V.new(5, 3), V.new(5, 7))
-    inc = Edge.new(V.new(6, 6), V.new(6, 2))
+    ref = Collision::Edge.new(V.new(5, 3), V.new(5, 7))
+    inc = Collision::Edge.new(V.new(6, 6), V.new(6, 2))
 
     clip = Clip.new
     clip.solve(ref, inc)
@@ -15,8 +15,8 @@ RSpec.describe Clip do
   end
 
   it "find contact loc case one" do
-    ref = Edge.new(V.new(4, 7), V.new(7, 4))
-    inc = Edge.new(V.new(6, 2), V.new(6, 6))
+    ref = Collision::Edge.new(V.new(4, 7), V.new(7, 4))
+    inc = Collision::Edge.new(V.new(6, 2), V.new(6, 6))
 
     clip = Clip.new
     clip.solve(ref, inc)

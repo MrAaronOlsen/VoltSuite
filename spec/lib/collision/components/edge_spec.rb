@@ -1,7 +1,7 @@
-RSpec.describe Edge do
+RSpec.describe Collision::Edge do
 
   before do
-    @edge = Edge.new(V.new(1, -2), V.new(1, 2))
+    @edge = Collision::Edge.new(V.new(1, -2), V.new(1, 2))
   end
 
   it '#segment' do

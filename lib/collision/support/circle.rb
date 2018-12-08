@@ -12,7 +12,7 @@ class Support
     end
 
     def get_feature(axis)
-      Point.new(get_support(axis))
+      Collision::Point.new(get_support(axis))
     end
   end
 end

@@ -27,7 +27,7 @@ class Polytope
     point1 = current_edge.start
     point3 = current_edge.terminus
 
-    @heap.add(Edge.new(point1, point))
-    @heap.add(Edge.new(point, point3))
+    @heap.add(Collision::Edge.new(point1, point))
+    @heap.add(Collision::Edge.new(point, point3))
   end
 end

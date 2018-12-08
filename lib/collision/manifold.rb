@@ -24,7 +24,7 @@ class Manifold
     feature1 = @support1.get_feature(@epa.get_normal)
     feature2 = @support2.get_feature(@epa.get_normal.flip)
 
-    if feature1.instance_of? Point
+    if feature1.instance_of? Collision::Point
       @reference = @epa.get_closest_edge
       @normal = @epa.get_normal
       @contact_points = [feature1.point]
@@ -32,7 +32,7 @@ class Manifold
       return true
     end
 
-    if feature2.instance_of? Point
+    if feature2.instance_of? Collision::Point
       @reference = @epa.get_closest_edge
       @normal = @epa.get_normal
       @contact_points = [feature2.point]

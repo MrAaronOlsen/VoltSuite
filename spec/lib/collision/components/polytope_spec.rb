@@ -82,23 +82,23 @@ RSpec.describe Polytope do
   end
 
   def first_edge
-    Edge.new(V.new(-1, -2), V.new(-2, 1))
+    Collision::Edge.new(V.new(-1, -2), V.new(-2, 1))
   end
 
   def second_edge
-    Edge.new(V.new(1, -3), V.new(4, 0))
+    Collision::Edge.new(V.new(1, -3), V.new(4, 0))
   end
 
   def third_edge
-    Edge.new(V.new(-2, 5), V.new(3, 2))
+    Collision::Edge.new(V.new(-2, 5), V.new(3, 2))
   end
 
   def fourth_edge
-    Edge.new(V.new(-5, -1), V.new(-4, 1))
+    Collision::Edge.new(V.new(-5, -1), V.new(-4, 1))
   end
 
   def fifth_edge
-    Edge.new(V.new(4, 6), V.new(7, 3))
+    Collision::Edge.new(V.new(4, 6), V.new(7, 3))
   end
 
   def simplex

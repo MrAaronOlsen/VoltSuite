@@ -38,7 +38,7 @@ class Simplex
     @simplex.map.with_index do |point1, i|
       point2 = @simplex[(i + 1) % size]
 
-      Edge.new(point1, point2)
+      Collision::Edge.new(point1, point2)
     end
   end
 

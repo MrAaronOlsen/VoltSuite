@@ -23,8 +23,8 @@ class Support
       previous_point = index == 0 ? @points[points.size - 1] : @points[index - 1]
 
       # Build two edges from the farthest point to the points on each side of it
-      edge1 = Edge.new(previous_point, point)
-      edge2 = Edge.new(point, next_point)
+      edge1 = Collision::Edge.new(previous_point, point)
+      edge2 = Collision::Edge.new(point, next_point)
 
       # Return edge that is most perpendicular to axis
       edge1.normal.dot(axis) < edge2.normal.dot(axis) ? edge1 : edge2
