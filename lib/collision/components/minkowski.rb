@@ -15,4 +15,14 @@ class Minkowski
 
     point1 - point2
   end
+
+  def brute
+    Array.new.tap do |points|
+      @support1.points.each do |point1|
+        @support2.points.each do |point2|
+          points << point2 - point1
+        end
+      end
+    end
+  end
 end
