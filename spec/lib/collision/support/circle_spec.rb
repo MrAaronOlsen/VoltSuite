@@ -33,7 +33,5 @@ RSpec.describe Support::Circle do
   it '#points' do
     support = Support::Circle.new(V.new(4, 4), 2)
     points = support.points
-
-    binding.pry
   end
 end

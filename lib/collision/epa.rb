@@ -43,7 +43,6 @@ class EPA
       end
     end
 
-    binding.pry
     @closest_edge = edge
     @depth = projection
     @normal = edge.normal * winding
