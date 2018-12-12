@@ -16,7 +16,7 @@ module Volt
     attr_reader :hull, :bounding
 
     def initialize()
-      @pos, @origin_angle, @trans = V.new, 0.0, Mat.new_identity
+      @pos, @origin_angle, @trans = V.new, 0.0, Trans.new_identity
       @acc, @vel, @mass = V.new, V.new, 0.0
       @angle, @a_vel, @moment = 0.0, 0.0, 0.0
       @damp, @restitution, @forces, @torque = 0.999, 1.0, V.new, 0.0
@@ -58,27 +58,27 @@ module Volt
   # Transform Shape Functions
 
     def init
-      transform(Mat.new_identity)
+      transform(Trans.new_identity)
       build
     end
 
     def offset(vect)
-      transform(Mat.new_translate(vect))
+      transform(Trans.new_translate(vect))
       build
     end
 
     def recenter
-      transform(Mat.new_translate(@pos - trans.transform_vert(cog)))
+      transform(Trans.new_translate(@pos - trans.transform_vert(cog)))
       build
     end
 
     def rotate(angle)
-      transform(Mat.new_rotate(angle))
+      transform(Trans.new_rotate(angle))
       build
     end
 
     def scale(x, y)
-      transform(Mat.new_scale(x, y))
+      transform(Trans.new_scale(x, y))
       build
     end
 
@@ -103,7 +103,7 @@ module Volt
     end
 
     def set_transform
-      @trans = Mat.new_transform(@pos, @angle)
+      @trans = Trans.new_transform(@pos, @angle)
     end
 
     def set_cog
