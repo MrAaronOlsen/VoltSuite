@@ -42,10 +42,7 @@ module Volt
     end
 
     def transform(trans)
-      @verts.each do |vert|
-        vert.transform(trans)
-      end
-
+      @verts = trans.transform_all(@verts)
       @centroid = VectMath.average(@verts)
     end
   end

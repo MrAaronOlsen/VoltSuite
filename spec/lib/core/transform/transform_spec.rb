@@ -35,7 +35,7 @@ RSpec.describe do
     expect(@shape[3]).to be_within_vect(0.0001).of(V.new(3.0, 5.0))
   end
 
-  it '#transform_vert translate rotate' do
+  it '#transform_vert transform' do
     trans_rot  = Transform.new_transform(V.new(4, 4), 45)
 
     @shape.map! { |vert| trans_rot.transform_vert(vert) }
@@ -71,6 +71,24 @@ RSpec.describe do
     expect(@shape[1]).to be_within_vect(0.0001).of(V.new(5.4142, 4.0))
     expect(@shape[2]).to be_within_vect(0.0001).of(V.new(4.0, 5.4142))
     expect(@shape[3]).to be_within_vect(0.0001).of(V.new(2.5857, 4.0))
+  end
+
+  it '#inverse' do
+    transform = Transform.new_transform(V.new(4, 4), 45)
+    @shape.map! { |vert| transform.transform_vert(vert) }
+
+    expect(@shape[0]).to be_within_vect(0.0001).of(V.new(4.0, 2.5857))
+    expect(@shape[1]).to be_within_vect(0.0001).of(V.new(5.4142, 4.0))
+    expect(@shape[2]).to be_within_vect(0.0001).of(V.new(4.0, 5.4142))
+    expect(@shape[3]).to be_within_vect(0.0001).of(V.new(2.5857, 4.0))
+
+    inverse = transform.inverse
+    @shape.map! { |vert| inverse.transform_vert(vert) }
+
+    expect(@shape[0]).to be_within_vect(0.0001).of(V.new(-1.0, -1.0))
+    expect(@shape[1]).to be_within_vect(0.0001).of(V.new(1.0, -1.0))
+    expect(@shape[2]).to be_within_vect(0.0001).of(V.new(1.0, 1.0))
+    expect(@shape[3]).to be_within_vect(0.0001).of(V.new(-1.0, 1.0))
   end
 
 end

@@ -39,14 +39,6 @@ class Transform
       Trans.new(x.to_f, 0.0, 0.0, 0.0, y.to_f, 0.0)
     end
 
-    def new_shear(x, y)
-      Trans.new(1.0, x, 0.0, y, 1.0, 0.0)
-    end
-
-    def new_skew(x, y)
-      Trans.new(1.0, Math.tan(x), 0.0, Math.tan(y), 1.0, 0.0)
-    end
-
     def new_transform(vect, angle)
       radian = VoltMath.radian(angle)
 
@@ -59,15 +51,20 @@ class Transform
 
 # Trans
 
-  def transform_vert(vert)
+  def transform(vert)
     x = @a * vert.x + @c * vert.y + @tx
-    y = @b * vert.x + @d * vert.y + @ty
+		y = @b * vert.x + @d * vert.y + @ty
 
     V.new(x, y)
   end
 
-  alias_method :transform, :transform_vert
-  alias_method :apply, :transform_vert
+  alias_method :transform_vert, :transform
+
+  def transform_all(verts)
+    verts.map { |vert| transform(vert) }
+  end
+
+  alias_method :transform_verts, :transform_all
 
   def multiply(trans)
     self.tap do
@@ -108,6 +105,14 @@ class Transform
       tr.d = @a / i
       tr.ty = (@b * @tx - @a * @ty) / i
     end
+  end
+
+  def get_rotation
+		Math.atan2(-b, a);
+  end
+
+  def get_translation
+    V.new(@tx, @ty)
   end
 
   def to_s

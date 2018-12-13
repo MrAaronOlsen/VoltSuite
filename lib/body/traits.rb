@@ -50,7 +50,7 @@ module Volt
     end
 
     def all_verts
-      @shapes.reduce([]) do |all, shape|
+      @shapes.reduce(Array.new) do |all, shape|
         all + shape.verts
       end
     end
@@ -94,9 +94,9 @@ module Volt
 
     private
 
-    def transform(matrix)
+    def transform(trans)
       @shapes.each do |shape|
-        shape.transform(matrix)
+        shape.transform(trans)
       end
 
       set_cog
