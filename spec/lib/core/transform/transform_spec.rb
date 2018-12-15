@@ -60,10 +60,10 @@ RSpec.describe do
     expect(@shape[3]).to be_within_vect(0.0001).of(V.new(2.5857, 4.0))
   end
 
-  it '#multiply' do
+  it '#mult' do
     translate = Transform.new_translate(V.new(4, 4))
     rotate = Transform.new_rotate(45)
-    translate.multiply(rotate)
+    translate.mult(rotate)
 
     @shape.map! { |vert| translate.transform_vert(vert) }
 

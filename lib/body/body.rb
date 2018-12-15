@@ -40,7 +40,7 @@ module Volt
     def add_force_at(force, vert)
       @forces.add(force)
 
-      r = point - Ref.get(@trans, cog)
+      r = point - @trans.transform(cog)
       @torque += r.cross(force)
     end
 
@@ -53,14 +53,14 @@ module Volt
     end
 
     def add_rot_impulse(impulse, point)
-      r = point - Ref.get(@trans, cog)
+      r = point - @trans.transform(cog)
       @a_vel += r.cross(impulse) * @i_moment
     end
 
     def add_impulse_at(impulse, point)
       @vel += impulse * @i_mass
 
-      r = point - Ref.get(@trans, cog)
+      r = point - @trans.transform(cog)
       @a_vel += r.cross(impulse) * @i_moment
     end
 

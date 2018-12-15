@@ -66,7 +66,7 @@ class Transform
 
   alias_method :transform_verts, :transform_all
 
-  def multiply(trans)
+  def mult(trans)
     self.tap do
       a = @a * trans.a + @c * trans.b
       c = @a * trans.c + @c * trans.d
@@ -79,7 +79,7 @@ class Transform
     end
   end
 
-  alias_method :compose!, :multiply
+  alias_method :compose!, :mult
 
   def *(trans)
     Trans.new do |tr|
@@ -92,7 +92,7 @@ class Transform
     end
   end
 
-  alias_method :compose, :multiply
+  alias_method :compose, :*
 
   def inverse
     i = @a * @d - @b * @c
