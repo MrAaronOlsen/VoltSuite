@@ -20,7 +20,7 @@ class Ship
       r_wing, cockpit, l_wing_tip,
       r_wing_tip, l_engine, r_engine ]
 
-    @body.rotate(90)
+    @body.rotate!(90)
     @body.recenter
   end
 

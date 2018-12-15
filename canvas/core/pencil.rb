@@ -7,7 +7,7 @@ module Canvas
 
 
       		60.times do
-      			axis2.rotate(6)
+      			axis2.rotate!(6)
 
             v1 = axis1 + center
             v2 = axis2 + center
@@ -18,7 +18,7 @@ module Canvas
               line([v1, v2], color, z )
             end
 
-      			axis1.rotate(6)
+      			axis1.rotate!(6)
       		end
       end
 

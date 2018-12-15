@@ -17,7 +17,7 @@ class Wall
 
   def build(angle)
     @parts = [line]
-    @body.rotate(angle)
+    @body.rotate!(angle)
   end
 
   class << self

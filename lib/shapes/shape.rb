@@ -1,6 +1,6 @@
 module Volt
   class Shape
-    attr_reader :name
+    attr_reader :name, :support
     attr_reader :centroid, :verts, :radius
     attr_reader :type, :static, :mass, :body
 

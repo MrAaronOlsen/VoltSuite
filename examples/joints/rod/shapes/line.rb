@@ -19,7 +19,7 @@ class Line
     @parts = [line(length)]
 
     @body.init
-    @body.rotate(angle)
+    @body.rotate!(angle)
     @body.recenter
   end
 

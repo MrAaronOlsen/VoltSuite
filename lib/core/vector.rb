@@ -19,7 +19,7 @@ class Vector
 
     # Makes a vector and rotates it by the given angle (in degrees)
     def with_rotation(x, y, degree)
-      Vector.new(x, y).tap { |vect| vect.rotate(degree) }
+      Vector.new(x, y).tap { |vect| vect.rotate!(degree) }
     end
 
   end
@@ -137,7 +137,7 @@ class Vector
   end
 
   # Rotate self by some degree around origin
-  def rotate(degree)
+  def rotate!(degree)
     radian = VoltMath.radian(degree)
 
     x = @x
@@ -148,6 +148,19 @@ class Vector
       @x = x * cos - @y * sin
       @y = x * sin + @y * cos
     end
+	end
+
+  def rotate(degree)
+    radian = VoltMath.radian(degree)
+
+    x = @x
+    cos = Math.cos(radian)
+    sin = Math.sin(radian)
+
+    V.new(
+      x * cos - @y * sin,
+      x * sin + @y * cos
+    )
 	end
 
   # Overrides

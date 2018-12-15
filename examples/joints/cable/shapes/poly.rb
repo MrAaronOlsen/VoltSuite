@@ -19,7 +19,7 @@ class Poly
 
     @body.init
     @body.recenter
-    @body.rotate(angle)
+    @body.rotate!(angle)
   end
 
   # Parts

@@ -20,7 +20,7 @@ class Player
 
     @body.init
     @body.recenter
-    @body.rotate(angle)
+    @body.rotate!(angle)
 
     add_callbacks
   end

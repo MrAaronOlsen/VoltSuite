@@ -16,7 +16,7 @@ class Ball
 
   def build
     @parts = [circle, line]
-    @body.rotate(90)
+    @body.rotate!(90)
   end
 
   def go

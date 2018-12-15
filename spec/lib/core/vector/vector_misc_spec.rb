@@ -58,7 +58,7 @@ RSpec.describe Vector do
     end
 
     it '#rotate' do
-      @vect1.rotate(90)
+      @vect1.rotate!(90)
 
       expect(@vect1.x).to be_within(0.0001).of(-4.0)
       expect(@vect1.y).to be_within(0.0001).of(3.0)

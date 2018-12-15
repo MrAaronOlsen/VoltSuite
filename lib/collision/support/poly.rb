@@ -1,10 +1,14 @@
-class Support
-
+module Support
   class Poly
     attr_reader :center, :points
 
     def initialize(center, points)
       @center, @points = center, points
+    end
+
+    def transform(trans)
+      @center = trans.transform(@center)
+      @points = trans.transform_verts(@points)
     end
 
     def get_support(axis)
