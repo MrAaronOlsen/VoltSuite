@@ -86,10 +86,18 @@ module Volt
       @shapes << shape
     end
 
+    def add_shapes(shapes)
+      shapes.each { |shape| @shapes << shape }
+    end
+
     def build
       set_transform
       set_cog
       set_hull
+    end
+
+    def set_transform
+      @trans = Trans.new_transform(@pos, @angle)
     end
 
     private
@@ -100,10 +108,6 @@ module Volt
       end
 
       set_cog
-    end
-
-    def set_transform
-      @trans = Trans.new_transform(@pos, @angle)
     end
 
     def set_cog

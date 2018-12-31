@@ -1,10 +1,12 @@
-class Poly
+class Circle
   attr_reader :shape, :body, :active
   attr_accessor :color, :fill, :z
 
-  def initialize(pos)
-    @shape = Volt::Shape::Poly.new do |shape|
-      shape.set_verts([V.new(0, 0), V.new(200, 0), V.new(200, 200), V.new(0, 200)])
+  def initialize(pos, radius)
+    @radius = radius
+
+    @shape = Volt::Shape::Circle.new do |shape|
+      shape.set_verts(pos, radius)
     end
 
     @body = Body.new do |b|
@@ -12,11 +14,9 @@ class Poly
       b.add_shape(@shape)
     end
 
-    @body.init
-
     @z = 0
     @fill = true
-    @color = Canvas::Colors.green
+    @color = Canvas::Colors.blue
 
     @active = false
   end
@@ -27,23 +27,14 @@ class Poly
 
   def update(mouse)
     @body.pos = mouse.get_mouse_pos - mouse.offset
-    @body.set_transform
-  end
-
-  def world_verts
-    @body.trans.transform_all(@shape.verts)
-  end
-
-  def world_center
-    @body.trans.transform(@shape.centroid)
   end
 
   def get_support
-    Support::Poly.new(world_center, world_verts)
+    Support::Circle.new(pos, @radius)
   end
 
   def draw
-    Canvas::Pencil.poly(world_verts, world_center, @color.get, @fill, @z)
+    Canvas::Pencil.circle(pos, @radius, @color.get, @fill, @z)
   end
 
   def mouse_on
