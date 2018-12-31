@@ -8,6 +8,7 @@ class Controller
     case key
     when Gosu::MS_LEFT
       check_active_shapes
+      check_picker
     end
   end
 
@@ -30,5 +31,11 @@ class Controller
       active_shape.activate
       @space.mouse.set_offset(active_shape.pos)
     end
+  end
+
+  def check_picker
+    active = @space.picker.active
+
+    puts "Selected #{active.shape.type}" if !active.nil?
   end
 end

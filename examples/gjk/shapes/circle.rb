@@ -16,7 +16,7 @@ class Circle
 
     @z = 0
     @fill = true
-    @color = Canvas::Colors.blue
+    @color = Canvas::Colors.orange
 
     @active = false
   end

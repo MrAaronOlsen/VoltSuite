@@ -1,7 +1,11 @@
 require_relative '../manifest.rb'
 
+require_relative 'updater.rb'
+require_relative 'picker.rb'
+
 require_relative 'space.rb'
 require_relative 'controller.rb'
+
 require_relative 'shapes/poly.rb'
 require_relative 'shapes/circle.rb'
 require_relative 'shapes/mink.rb'
@@ -14,14 +18,13 @@ class Window < Gosu::Window
 	attr_reader :time_step
 
 	def initialize
-    $window_width = 1200
-    $window_height = 1200
+    $window_width, $window_height = 1800, 1200
+		$window_center = V.new($window_width / 2, $window_height / 2)
 
     super($window_width, $window_height, false)
     self.caption = "GJK Test Bed"
 
     @space = Space.new(self)
-		@time_step = 1.0/60.0
  	end
 
 	def update
