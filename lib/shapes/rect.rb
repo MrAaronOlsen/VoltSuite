@@ -8,11 +8,11 @@ module Volt
         yield self
       end
 
-      def set_verts(width, height, offset = V.new)
-        @verts << Vect.new(offset.x, offset.y)
-        @verts << Vect.new(width + offset.x, offset.y)
-        @verts << Vect.new(width + offset.x, height + offset.y)
-        @verts << Vect.new(offset.x, height + offset.y)
+      def set_verts(width, height)
+        @verts << Vect.new(0, 0)
+        @verts << Vect.new(width, 0)
+        @verts << Vect.new(width, height)
+        @verts << Vect.new(0, height)
       end
 
       def get_support

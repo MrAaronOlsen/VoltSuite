@@ -1,11 +1,11 @@
 module GJKShapes
-  class Poly
+  class Line
     attr_reader :shape, :body, :active
     attr_accessor :color, :fill, :z
 
     def initialize(pos)
-      @shape = Volt::Shape::Poly.new do |shape|
-        shape.set_verts([V.new(20, 0), V.new(120, 40), V.new(180, 120), V.new(200, 200), V.new(40, 160), V.new(0, 120)])
+      @shape = Volt::Shape::Seg.new do |shape|
+        shape.set_verts(V.new(0, 0), V.new(200, 0))
       end
 
       @body = Body.new do |b|
@@ -17,7 +17,8 @@ module GJKShapes
 
       @z = 0
       @fill = true
-      @color = Canvas::Colors.purple
+      @color_off = Canvas::Colors.yellow
+      @color_on = Canvas::Colors.red
 
       @active = false
     end
@@ -44,16 +45,18 @@ module GJKShapes
     end
 
     def draw
-      Canvas::Pencil.poly(world_verts, world_center, @color.get, @fill, @z)
+      Canvas::Pencil.line(world_verts, @color.get, @z)
     end
 
     def mouse_on
       @fill = true
+      @color = @color_on
       @z = 2
     end
 
     def mouse_off
       @fill = false
+      @color = @color_off
       @z = 1
     end
 

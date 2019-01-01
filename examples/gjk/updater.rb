@@ -1,7 +1,7 @@
 class Updater
 
   def update_mink
-    @gjk.solve(@mink.mink) ? @mink.fill = true : @mink.fill = false
+    @gjk.solve(@mink.mink) ? @mink.active : @mink.inactive
   end
 
   def update_shapes(mouse_support)

@@ -36,6 +36,8 @@ class Controller
   def check_picker
     active = @space.picker.active
 
-    puts "Selected #{active.shape.type}" if !active.nil?
+    if !active.nil?
+      @space.replace_shape(active.index, active.shape.spawn)
+    end
   end
 end
