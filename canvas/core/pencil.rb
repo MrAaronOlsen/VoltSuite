@@ -54,6 +54,15 @@ module Canvas
         end
       end
 
+      def rect2(origin, width, height, color, fill, z = 1)
+        tl = origin
+        tr = origin + V.new(width, 0)
+        br = origin + V.new(width, height)
+        bl = origin + V.new(0, height)
+
+        rect([tl, tr, br, bl], color, fill, z)
+      end
+
       def poly(points, center, color, fill, z = 1)
         points.push(points[0])
 

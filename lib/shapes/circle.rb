@@ -21,10 +21,6 @@ module Volt
           V.new(x - radius, y + radius)
         ]
       end
-
-      def get_support
-        Support::Circle.new(@centroid, @radius)
-      end
     end
   end
 end

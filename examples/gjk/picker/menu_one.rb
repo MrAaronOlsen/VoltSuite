@@ -6,7 +6,7 @@ class MenuOne
     @trans = Trans.new_translate(V.new($window_width - 650, 50))
     @selection_box = SelectionBox.new(@trans)
 
-    @spawn_pos = $window_center
+    @spawn_pos = $window_center + V.new(100, 50)
 
     @line = PickerShapes::Line.new(@trans * Trans.new_translate(V.new(25, 25)), @spawn_pos)
     @tri = PickerShapes::Tri.new(@trans * Trans.new_translate(V.new(125, 25)), @spawn_pos)

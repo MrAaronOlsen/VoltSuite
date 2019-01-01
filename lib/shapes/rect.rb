@@ -14,10 +14,6 @@ module Volt
         @verts << Vect.new(width, height)
         @verts << Vect.new(0, height)
       end
-
-      def get_support
-        Support::Poly.new(@centroid, @verts)
-      end
     end
   end
 end

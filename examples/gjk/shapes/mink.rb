@@ -2,9 +2,8 @@ class Mink
   attr_reader :shape, :body, :active, :mink
   attr_accessor :color, :fill, :z
 
-  def initialize(shape1, shape2)
-    @shape1 = shape1
-    @shape2 = shape2
+  def initialize
+    @shape1 = @shape2 = nil
 
     @color_off = Canvas::Colors.white
     @color_on = Canvas::Colors.red
@@ -18,8 +17,14 @@ class Mink
   end
 
   def update
+    return if invalid?
+
     @mink = Minkowski.new(@shape1.get_support, @shape2.get_support)
     @mink_hull = Hull.new(@mink.brute)
+  end
+
+  def invalid?
+    @shape1.nil? || @shape2.nil?
   end
 
   def active
@@ -39,7 +44,9 @@ class Mink
   end
 
   def draw
-    Gosu.clip_to(0, 0, 800, 800) do
+    return if invalid?
+
+    Gosu.clip_to(50, 50, 750, 750) do
       Canvas::Pencil.poly(world_verts, world_center, @color.get, @fill, @z)
     end
   end

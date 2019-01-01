@@ -21,6 +21,7 @@ require_relative 'shapes/circle.rb'
 require_relative 'shapes/mink.rb'
 require_relative 'shapes/mouse.rb'
 require_relative 'shapes/origin.rb'
+require_relative 'shapes/shape_area.rb'
 
 require_relative 'space.rb'
 

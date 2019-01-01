@@ -14,6 +14,7 @@ module GJKShapes
       end
 
       @body.init
+      @body.recenter
 
       @z = 0
       @fill = true
@@ -24,6 +25,10 @@ module GJKShapes
 
     def pos
       @body.pos
+    end
+
+    def rotate(degree)
+      @body.rotate(degree)
     end
 
     def update(mouse)

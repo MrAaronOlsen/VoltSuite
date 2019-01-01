@@ -26,6 +26,10 @@ module GJKShapes
       @body.pos
     end
 
+    def rotate(degree)
+      @body.rotate(degree)
+    end
+
     def update(mouse)
       @body.pos = mouse.get_mouse_pos - mouse.offset
     end

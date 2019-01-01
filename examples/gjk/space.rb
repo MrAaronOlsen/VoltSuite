@@ -1,25 +1,23 @@
 class Space < Updater
-  attr_reader :shapes, :mouse, :picker
+  attr_reader :shapes, :active_shape, :mouse, :picker
 
   def initialize(window)
     @controller = Controller.new(self)
     @picker = Picker.new
 
     @gjk = GJK.new
+    @shapes = [nil, nil]
 
-    shape1 = GJKShapes::Poly.new($window_center)
-    shape2 = GJKShapes::Circle.new($window_center + V.new(300, 300), 100)
-    @shapes = [shape1, shape2]
-
-    @mink = Mink.new(shape1, shape2)
+    @mink = Mink.new
     @mouse = Mouse.new(window)
 
-    @drawable = [@mouse, @mink, Origin.new, @picker]
+    @drawable = [@mouse, @mink, @picker, Origin.new, ShapeArea.new]
   end
 
   def update
     mouse_support = @mouse.get_support
 
+    @controller.update
     update_mink
     update_shapes(mouse_support)
     @picker.update(@gjk, mouse_support)
@@ -27,7 +25,10 @@ class Space < Updater
 
   def draw
     @drawable.each { |shape| shape.draw }
-    @shapes.each { |shape| shape.draw }
+
+    Gosu.clip_to(800, 150, 850, 1000) do
+      @shapes.each { |shape| shape.draw if shape }
+    end
   end
 
   def button_down?(key)
@@ -37,5 +38,13 @@ class Space < Updater
   def replace_shape(index, shape)
     @shapes[index] = shape
     @mink.set_shapes(@shapes[0], @shapes[1])
+  end
+
+  def set_active_shape(active_shape)
+    @active_shape = active_shape
+  end
+
+  def clear_active_shape
+    @active_shape = nil
   end
 end

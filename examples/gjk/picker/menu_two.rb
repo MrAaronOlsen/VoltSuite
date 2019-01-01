@@ -6,7 +6,7 @@ class MenuTwo
     @trans = Trans.new_translate(V.new($window_width - 150, 150))
     @selection_box = SelectionBox.new(@trans)
 
-    @spawn_pos = $window_center + V.new(200, 200)
+    @spawn_pos = $window_center + V.new(550, 50)
 
     @line = PickerShapes::Line.new(@trans * Trans.new_translate(V.new(25, 25)), @spawn_pos)
     @tri = PickerShapes::Tri.new(@trans * Trans.new_translate(V.new(25, 125)), @spawn_pos)

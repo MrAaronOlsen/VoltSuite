@@ -14,17 +14,24 @@ module GJKShapes
       end
 
       @body.init
+      @body.recenter
 
       @z = 0
       @fill = true
       @color_off = Canvas::Colors.yellow
       @color_on = Canvas::Colors.red
 
+      @color = @color_off
+
       @active = false
     end
 
     def pos
       @body.pos
+    end
+
+    def rotate(degree)
+      @body.rotate(degree)
     end
 
     def update(mouse)

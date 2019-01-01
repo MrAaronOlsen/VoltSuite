@@ -7,7 +7,7 @@ module Volt
     def initialize(type)
       @type = type
       @static = false
-      @mass, @centroid, @verts = 0, Vect.new, []
+      @mass, @centroid, @verts = 1, Vect.new, []
     end
 
     def name=(name)
