@@ -17,6 +17,10 @@ module Canvas
         Color.new(255, 255, 255, 0)
       end
 
+      def yellow_green
+        Color.new(255, 154, 255, 0)
+      end
+
       def megenta
         Color.new(255, 255, 255, 255)
       end

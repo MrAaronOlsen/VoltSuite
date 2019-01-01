@@ -15,9 +15,9 @@ module GJKShapes
         b.add_shape(@shape)
       end
 
-      @z = 0
-      @fill = true
       @color = Canvas::Colors.orange
+      @fill = false
+      @z = 1
 
       @active = false
     end

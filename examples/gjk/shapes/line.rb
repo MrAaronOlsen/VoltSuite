@@ -16,12 +16,14 @@ module GJKShapes
       @body.init
       @body.recenter
 
-      @z = 0
-      @fill = true
       @color_off = Canvas::Colors.yellow
-      @color_on = Canvas::Colors.red
-
+      @color_on = Canvas::Colors.yellow_green
       @color = @color_off
+
+      @fill = false
+      @z = 0
+
+
 
       @active = false
     end

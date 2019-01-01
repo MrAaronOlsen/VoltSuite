@@ -16,9 +16,9 @@ module GJKShapes
       @body.init
       @body.recenter
 
-      @z = 0
-      @fill = true
       @color = Canvas::Colors.green
+      @fill = false
+      @z = 1
 
       @active = false
     end
