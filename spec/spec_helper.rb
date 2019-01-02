@@ -4,12 +4,11 @@ SimpleCov.start do
   add_filter('/manifest.rb')
 end
 
+require './master_manifest.rb'
+require 'be_within_vect.rb'
+
 require 'rspec'
 require 'pry'
-
-require './master_manifest.rb'
-
-Dir["./spec_helpers/*.rb"].each { |file| require file }
 
 RSpec::configure do |config|
   config.include(BeWithinVect)

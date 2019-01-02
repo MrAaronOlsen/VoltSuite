@@ -73,6 +73,10 @@ module Volt
       @a_vel += vel
     end
 
+    def add_angle(angle)
+      @angle += angle
+    end
+
     def set_vel(vel)
       @vel = vel
     end

@@ -28,7 +28,7 @@ module GJKShapes
     end
 
     def rotate(degree)
-      @body.rotate(degree)
+      @body.add_angle(degree)
     end
 
     def update(mouse)
