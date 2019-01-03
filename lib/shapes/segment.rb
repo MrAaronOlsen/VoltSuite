@@ -8,8 +8,9 @@ module Volt
         yield self
       end
 
-      def set_verts(v1, v2)
+      def build(v1, v2)
         @verts = [v1, v2]
+        @centroid = VectMath.average(@verts)
       end
     end
 

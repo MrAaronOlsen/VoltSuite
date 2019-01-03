@@ -38,6 +38,34 @@ class VectorMath
       points.reduce(V.new) { |sum, point| sum += point } / points.size
     end
 
+    def area_average(points)
+      size = points.size
+      return points[0] if size == 1
+      return average(points) if size == 2
+
+      area = 0.0;
+
+      ac = average(points)
+      center = V.new
+
+  		points.each_with_index do |point, i|
+  			p1 = points[i] - ac
+  			p2 = points[(i + 1) % size] - ac
+
+  			d = p1.cross(p2)
+  			triangleArea = 0.5 * d
+
+  			area += triangleArea;
+
+  			center.add(p1.add(p2).mult(1.0/3.0).mult(triangleArea))
+      end
+
+  		return points[0] if area.abs <= Epsilon.e
+
+  		center.mult(1.0 / area)
+  		center.add(ac)
+    end
+
     # Returns the normal of a to b most in the direction of c.
     def normal_towards(a, b, c)
       ac = a.dot(c)

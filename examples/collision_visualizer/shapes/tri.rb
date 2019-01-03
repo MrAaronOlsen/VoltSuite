@@ -1,13 +1,11 @@
 module GJKShapes
-  class Circle
+  class Tri
     attr_reader :shape, :body, :active
     attr_accessor :color, :fill, :z
 
-    def initialize(pos, radius)
-      @radius = radius
-
-      @shape = Volt::Shape::Circle.new do |shape|
-        shape.set_verts(pos, radius)
+    def initialize(pos)
+      @shape = Volt::Shape::Tri.new do |shape|
+        shape.build(V.new(100, 0), V.new(200, 200), V.new(0, 200))
       end
 
       @body = Body.new do |b|
@@ -15,7 +13,10 @@ module GJKShapes
         b.add_shape(@shape)
       end
 
-      @color = Canvas::Colors.orange
+      @body.init
+      @body.recenter
+
+      @color = Canvas::Colors.green
       @fill = false
       @z = 1
 
@@ -27,19 +28,28 @@ module GJKShapes
     end
 
     def rotate(degree)
-      @body.rotate(degree)
+      @body.add_angle(degree)
     end
 
     def update(mouse)
       @body.pos = mouse.get_mouse_pos - mouse.offset
+      @body.set_transform
+    end
+
+    def world_verts
+      @body.trans.transform_all(@shape.verts)
+    end
+
+    def world_center
+      @body.trans.transform(@shape.centroid)
     end
 
     def get_support
-      Support::Circle.new(pos, @radius)
+      Support::Poly.new(world_center, world_verts)
     end
 
     def draw
-      Canvas::Pencil.circle(pos, @radius, @color.get, @fill, @z)
+      Canvas::Pencil.tri(world_verts, @color.get, @fill, @z)
     end
 
     def mouse_on

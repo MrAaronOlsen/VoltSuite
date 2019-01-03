@@ -74,4 +74,61 @@ RSpec.describe VectorMath do
       expect(distance).to be_within(0.0001).of(0.7071)
     end
   end
+
+  describe '#averages' do
+
+    context 'segment' do
+      before do
+        @points = [V.new(-5, 0), V.new(5, 0)]
+      end
+
+      it 'can find average' do
+        average = VectMath.average(@points)
+
+        expect(average).to eq(V.new(0, 0))
+      end
+
+      it 'can find area average' do
+        average = VectMath.area_average(@points)
+
+        expect(average).to eq(V.new(0, 0))
+      end
+    end
+
+    context 'triangle' do
+      before do
+        @points = [V.new(0, -5), V.new(5, 5), V.new(-5, 5)]
+      end
+
+      it 'can find average' do
+        average = VectMath.average(@points)
+
+        expect(average).to be_within_vect(0.0001).of(V.new(0, 1.6666))
+      end
+
+      it 'can find area average' do
+        average = VectMath.area_average(@points)
+
+        expect(average).to be_within_vect(0.0001).of(V.new(0, 1.6666))
+      end
+    end
+
+    context 'square' do
+      before do
+        @points = [V.new(-5, -5), V.new(5, -5), V.new(5, 5), V.new(-5, 5)]
+      end
+
+      it 'can find average' do
+        average = VectMath.average(@points)
+
+        expect(average).to eq(V.new(0, 0))
+      end
+
+      it 'can find area average' do
+        average = VectMath.area_average(@points)
+
+        expect(average).to eq(V.new(0, 0))
+      end
+    end
+  end
 end

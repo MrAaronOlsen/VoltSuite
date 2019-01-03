@@ -1,7 +1,5 @@
 module Support
   class Circle
-    EPSILON = Epsilon.new.e
-
     attr_reader :center, :radius
     attr_accessor :resolution
 

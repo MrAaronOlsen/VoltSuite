@@ -5,7 +5,7 @@ module GJKShapes
 
     def initialize(pos)
       @shape = Volt::Shape::Seg.new do |shape|
-        shape.set_verts(V.new(0, 0), V.new(200, 0))
+        shape.build(V.new(0, 0), V.new(200, 0))
       end
 
       @body = Body.new do |b|

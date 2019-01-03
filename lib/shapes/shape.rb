@@ -29,7 +29,7 @@ module Volt
 
     def transform(trans)
       @verts = trans.transform_all(@verts)
-      @centroid = VectMath.average(@verts)
+      @centroid = trans.transform(@centroid)
     end
   end
 end

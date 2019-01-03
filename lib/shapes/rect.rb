@@ -1,6 +1,7 @@
 module Volt
   class Shape
-    class Rect < Shape
+    class Rectangle < Shape
+      attr_reader :corner, :width, :height
 
       def initialize
         super(:rect)
@@ -8,12 +9,22 @@ module Volt
         yield self
       end
 
-      def set_verts(width, height)
-        @verts << Vect.new(0, 0)
-        @verts << Vect.new(width, 0)
-        @verts << Vect.new(width, height)
-        @verts << Vect.new(0, height)
+      def build(corner, width, height)
+        @corner = corner
+        @width = width
+        @height = height
+
+        @verts = Trans.new_translate(@corner).transform_all(get_verts)
+        @centroid = VectMath.average(@verts)
+      end
+
+      private
+
+      def get_verts
+        [ Vect.new(0, 0), Vect.new(@width, 0), Vect.new(@width, @height), Vect.new(0, @height) ]
       end
     end
+
+    Rect = Rectangle
   end
 end

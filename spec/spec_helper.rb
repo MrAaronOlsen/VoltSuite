@@ -13,3 +13,5 @@ require 'pry'
 RSpec::configure do |config|
   config.include(BeWithinVect)
 end
+
+include Volt

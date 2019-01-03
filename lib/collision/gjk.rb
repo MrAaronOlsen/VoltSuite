@@ -1,7 +1,7 @@
 class GJK
   attr_reader :iterations, :simplex
 
-  EPSILON = Epsilon.new.e
+  EPSILON = Epsilon.e
 
   def initialize
     @max_iterations = 30

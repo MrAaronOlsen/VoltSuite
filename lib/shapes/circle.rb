@@ -8,19 +8,26 @@ module Volt
         yield self
       end
 
-      def set_verts(center, radius)
+      def build(center, radius)
         @radius = radius
+        @centroid = center
 
-        x = center.x
-        y = center.y
+        @verts = get_verts
+      end
 
-        @verts = [
-          V.new(x - radius, y - radius),
-          V.new(x + radius, y - radius),
-          V.new(x + radius, y + radius),
-          V.new(x - radius, y + radius)
-        ]
+    private
+
+      def get_verts
+        x = @centroid.x
+        y = @centroid.y
+
+        [ V.new(x - @radius, y - @radius),
+          V.new(x + @radius, y - @radius),
+          V.new(x + @radius, y + @radius),
+          V.new(x - @radius, y + @radius) ]
       end
     end
+
+    Circ = Circle
   end
 end

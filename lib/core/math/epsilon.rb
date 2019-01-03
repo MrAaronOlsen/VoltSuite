@@ -1,11 +1,6 @@
-class Epsilon
-  attr_reader :e
+class EpsilonComputer
 
-  def initialize
-    @e = compute
-  end
-
-  def compute
+  def self.solve
     e = 0.5
 
 		while 1.0 + e > 1.0 do
@@ -13,5 +8,13 @@ class Epsilon
     end
 
 		e
+  end
+end
+
+class Epsilon
+  @@epsilon = EpsilonComputer.solve
+
+  def self.e
+    @@epsilon
   end
 end

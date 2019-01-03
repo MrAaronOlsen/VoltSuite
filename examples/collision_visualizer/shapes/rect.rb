@@ -1,11 +1,11 @@
 module GJKShapes
-  class Poly
+  class Rect
     attr_reader :shape, :body, :active
     attr_accessor :color, :fill, :z
 
     def initialize(pos)
-      @shape = Volt::Shape::Poly.new do |shape|
-        shape.set_verts([V.new(20, 0), V.new(120, 40), V.new(180, 120), V.new(200, 200), V.new(40, 160), V.new(0, 120)])
+      @shape = Volt::Shape::Rect.new do |shape|
+        shape.build(V.new(0, 0), 200, 200)
       end
 
       @body = Body.new do |b|
@@ -16,7 +16,7 @@ module GJKShapes
       @body.init
       @body.recenter
 
-      @color = Canvas::Colors.purple
+      @color = Canvas::Colors.blue
       @fill = false
       @z = 1
 
@@ -49,7 +49,7 @@ module GJKShapes
     end
 
     def draw
-      Canvas::Pencil.poly(world_verts, world_center, @color.get, @fill, @z)
+      Canvas::Pencil.rect(world_verts, @color.get, @fill, @z)
     end
 
     def mouse_on

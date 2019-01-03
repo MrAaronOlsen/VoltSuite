@@ -1,6 +1,6 @@
 module Volt
   class Shape
-    class Tri < Shape
+    class Triangle < Shape
 
       def initialize
         super(:tri)
@@ -8,9 +8,12 @@ module Volt
         yield self
       end
 
-      def set_verts(v1, v2, v3)
-        @verts << v1 << v2 << v3
+      def build(v1, v2, v3)
+        @verts = [v1, v2, v3]
+        @centroid = VectMath.average(@verts)
       end
     end
+
+    Tri = Triangle
   end
 end

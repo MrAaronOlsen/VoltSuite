@@ -1,6 +1,6 @@
 module Volt
   class Shape
-    class Poly < Shape
+    class Polygon < Shape
 
       def initialize
         super(:poly)
@@ -8,9 +8,12 @@ module Volt
         yield self
       end
 
-      def set_verts(verts)
+      def build(verts)
         @verts = verts
+        @centroid = VectMath.area_average(@verts)
       end
     end
+
+    Poly = Polygon
   end
 end
