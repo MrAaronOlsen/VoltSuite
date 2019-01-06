@@ -8,7 +8,7 @@ module Volt
       attr_accessor :flipped, :is_dummy
 
       def initialize
-        @restitution = 0.8
+        @restitution = 0.7
 
         yield(self) if block_given?
       end

@@ -1,6 +1,7 @@
 module Volt
   module Contact
     class PolyLine
+      include Structs
       attr_reader :manifold
 
       def initialize(poly, line)
@@ -9,21 +10,21 @@ module Volt
 
       def query
         # Get world coords of verts in play
-        line_start = Ref.get(@line.body.trans, @line.verts[0])
-        line_end = Ref.get(@line.body.trans, @line.verts[1])
+        line_start = @line.body.trans.transform(@line.verts[0])
+        line_end = @line.body.trans.transform(@line.verts[1])
         line_edge = Edge.new(line_start, line_end)
 
-        poly_centroid = Ref.get(@poly.body.trans, @poly.centroid)
-        poly_verts = Ref.get_all(@poly.body.trans, @poly.verts)
+        poly_centroid = @poly.body.trans.transform(@poly.centroid)
+        poly_verts = @poly.body.trans.transform_all(@poly.verts)
 
         # First we check if this is a line to edge contact by using ray casting. Unfortunately we need to check both
         # ends of the line  make sure we know which end is inside the poly
-        line_contact = line_edge.from if Geo.point_is_inside_poly(poly_verts, line_edge.from)
-        line_contact = line_edge.to if line_contact.nil? && Geo.point_is_inside_poly(poly_verts, line_edge.to)
+        line_contact = line_edge.from if VectMath.point_is_inside_poly(poly_verts, line_edge.from)
+        line_contact = line_edge.to if line_contact.nil? && VectMath.point_is_inside_poly(poly_verts, line_edge.to)
 
         # If we have a line contact then find the rest of the contact data and return it.
         if line_contact.exists?
-          edge = Geo.find_edge_intersecting_with_line(poly_verts, line_edge.from, line_edge.to)
+          edge = VectMath.find_edge_intersecting_with_line(poly_verts, line_edge.from, line_edge.to)
 
           if edge
             @manifold = Manifold.new do |man|
@@ -48,10 +49,10 @@ module Volt
         return false if !penetration
 
         # Flip the normal if the poly centroid is on the other side
-        contact_normal.mult(-1) if Geo.determinant(line_edge.to, line_edge.from, poly_centroid) == -1
+        contact_normal.mult(-1) if VectMath.determinant(line_edge.to, line_edge.from, poly_centroid) == -1
 
         # To find the contact location we'll need to check each edge of the poly with the line
-        edge = Geo.find_edge_intersecting_with_line(poly_verts, line_edge.from, line_edge.to)
+        edge = VectMath.find_edge_intersecting_with_line(poly_verts, line_edge.from, line_edge.to)
 
         return false if !edge
         contact_loc = edge.contact_loc

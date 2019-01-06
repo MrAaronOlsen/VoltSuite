@@ -8,10 +8,10 @@ module Volt
       end
 
       def query
-        center1 = Ref.get(@circ1.body.trans, @circ1.centroid)
+        center1 = @circ1.body.trans.transform(@circ1.centroid)
         radius1 = @circ1.radius
 
-        center2 = Ref.get(@circ2.body.trans, @circ2.centroid)
+        center2 = @circ2.body.trans.transform(@circ2.centroid)
         radius2 = @circ2.radius
 
         d = center1 - center2

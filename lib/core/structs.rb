@@ -1,7 +1,7 @@
 module Volt
   module Structs
     ContactFaces = Struct.new(:reference, :incident)
-    PointAlongAxis = Struct.new(:distance, :point)
+    PointAlongAxis = Struct.new(:point, :position, :index)
     BroadContact = Struct.new(:body1, :body2)
 
     Edge = Struct.new(:from, :to) do

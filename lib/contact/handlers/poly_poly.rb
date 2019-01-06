@@ -10,8 +10,8 @@ module Volt
       def query
         @manifold = Manifold.new
 
-        poly1_verts = Ref.get_all(@poly1.body.trans, @poly1.verts)
-        poly2_verts = Ref.get_all(@poly2.body.trans, @poly2.verts)
+        poly1_verts = @poly1.body.trans.transform_all(@poly1.verts)
+        poly2_verts = @poly2.body.trans.transform_all(@poly2.verts)
 
         return false unless SAT.check_for_poly_poly(poly1_verts, poly2_verts, @manifold)
         return false unless SAT.check_for_poly_poly(poly2_verts, poly1_verts, @manifold)
@@ -19,7 +19,7 @@ module Volt
         SAT.find_contact_faces(poly1_verts, poly2_verts, @manifold)
         Clip.from_manifold(@manifold)
 
-        contact_loc = Geo.average_vector(@manifold.contact_locs)
+        contact_loc = VectMath.average_vector(@manifold.contact_locs)
 
         if @manifold.flipped
           @manifold.contact_loc = contact_loc - @manifold.mtv

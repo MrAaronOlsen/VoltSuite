@@ -16,7 +16,7 @@ module Volt
     def initialize()
       @pos, @origin_angle, @trans = V.new, 0.0, Trans.new_identity
       @acc, @vel, @mass = V.new, V.new, 0.0
-      @angle, @a_vel, @moment = 0.0, 0.0, 0.0
+      @angle = @a_vel = @moment = 0.0
       @damp, @restitution, @forces, @torque = 0.999, 1.0, V.new, 0.0
       @static_friction, @dynamic_friction = 1.0, 1.0
       @shapes, @cog, @bounding = [], V.new, AABB.new(self)
@@ -44,6 +44,10 @@ module Volt
 
     def vel=(vel)
       @vel = vel
+    end
+
+    def a_vel=(a_vel)
+      @a_vel = a_vel
     end
 
     def all_verts

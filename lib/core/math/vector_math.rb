@@ -1,7 +1,7 @@
 class VectorMath
-  PointAlongAxis = Struct.new(:point, :position, :index)
 
   class << self
+    include Volt::Structs
 
     # Projects vect2 onto vect1 and returns the projection as a vector
     def projection(vect1, vect2)
@@ -100,6 +100,59 @@ class VectorMath
           end
         end
       end
+    end
+
+    # Returns true if point is inside of poly, false if not.
+    def point_is_inside_poly(poly_verts, point)
+      count = poly_verts.count
+      intersections = 0
+
+      poly_verts.each_with_index do |face_start, i|
+        face_end = poly_verts[(i+1) % count]
+
+        if line_line_intersection(V.new(0, 0), point, face_start, face_end)
+          intersections += 1
+        end
+      end
+
+      !intersections.modulo(2).zero?
+    end
+
+    # Returns the position of a line line intersection. Nil if no intersection exists.
+    def line_line_intersection(l1s, l1e, l2s, l2e)
+      seg1 = l1e - l1s
+      seg2 = l2e - l2s
+
+      d = (-seg2.x * seg1.y + seg1.x * seg2.y)
+
+      s = (-seg1.y * (l1s.x - l2s.x) + seg1.x * (l1s.y - l2s.y)) / d;
+      t = ( seg2.x * (l1s.y - l2s.y) - seg2.y * (l1s.x - l2s.x)) / d;
+
+      if s > 0 && s < 1 && t > 0 && t < 1
+          x = l1s.x + (t * seg1.x)
+          y = l1s.y + (t * seg1.y)
+
+          V.new(x, y)
+      end
+    end
+
+    # Returns the Edge of a poly that intersects a given line. Nil if no intersection exists
+    def find_edge_intersecting_with_line(poly_verts, line_start, line_end)
+      count = poly_verts.count
+
+      poly_verts.each_with_index do |face_start, i|
+        face_end = poly_verts[(i+1) % count]
+
+        contact_loc = line_line_intersection(face_start, face_end, line_start, line_end)
+
+        if contact_loc
+          edge = Edge.new(face_start, face_end)
+          edge.contact_loc = contact_loc
+          return edge
+        end
+      end
+
+      nil
     end
   end
 end

@@ -8,21 +8,21 @@ module Volt
       end
 
       def query
-        line1_start = Ref.get(@line1.body.trans, @line1.verts[0])
-        line1_end = Ref.get(@line1.body.trans, @line1.verts[1])
+        line1_start = @line1.body.trans.transform(@line1.verts[0])
+        line1_end = @line1.body.trans.transform(@line1.verts[1])
 
-        line2_start = Ref.get(@line2.body.trans, @line2.verts[0])
-        line2_end = Ref.get(@line2.body.trans, @line2.verts[1])
+        line2_start = @line2.body.trans.transform(@line2.verts[0])
+        line2_end = @line2.body.trans.transform(@line2.verts[1])
 
-        contact_loc = Geo.line_line_intersection(line1_start, line1_end, line2_start, line2_end)
+        contact_loc = VectMath.line_line_intersection(line1_start, line1_end, line2_start, line2_end)
 
         return false unless contact_loc
 
         seg1 = line1_start - line1_end
         seg2 = line2_start - line2_end
 
-        l1_point = Geo.closest_point_to_line([line1_start, line1_end], line2_start, line2_end)
-        l2_point = Geo.closest_point_to_line([line2_start, line2_end], line1_start, line1_end)
+        l1_point = VectMath.closest_point_to_line([line1_start, line1_end], line2_start, line2_end)
+        l2_point = VectMath.closest_point_to_line([line2_start, line2_end], line1_start, line1_end)
 
         if l1_point.distance < l2_point.distance
           @manifold = Manifold.new do |man|
@@ -38,7 +38,7 @@ module Volt
           end
         end
 
-        d = Geo.get_centroid([line1_start, line1_end]) - Geo.get_centroid([line2_start, line2_end])
+        d = VectMath.average([line1_start, line1_end]) - VectMath.average([line2_start, line2_end])
         @manifold.flip_normal if d.dot(@manifold.contact_normal) < 0
 
         return true

@@ -74,7 +74,7 @@ module Volt
             manifold.add_sat_data(shadow1.get_overlap(shadow2), edge.normal)
           end
 
-          d = Geo.get_centroid(poly2_verts) - Geo.get_centroid(poly1_verts)
+          d = VectMath.area_average(poly2_verts) - VectMath.area_average(poly1_verts)
           manifold.flip_normal if d.dot(manifold.contact_normal) > 0
 
           true
@@ -95,11 +95,11 @@ module Volt
           axis = manifold.contact_normal
 
           verts1.each do |vert|
-            points1 << PointAlongAxis.new(Geo.distance_along_axis(axis, vert), vert)
+            points1 << PointAlongAxis.new(VectMath.distance_along_axis(axis, vert), vert)
           end
 
           verts2.each do |vert|
-            points2 << PointAlongAxis.new(Geo.distance_along_axis(axis.flipped, vert), vert)
+            points2 << PointAlongAxis.new(VectMath.distance_along_axis(axis.flipped, vert), vert)
           end
 
           farthest = points1.max_by(2) { |point| point.distance }

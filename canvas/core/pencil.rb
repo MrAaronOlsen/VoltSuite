@@ -26,7 +26,16 @@ module Canvas
 
         Gosu.draw_line(
           points[0].x, points[0].y, color,
-          points[1].x, points[1].y, color, z )
+          points[1].x, points[1].y, color, z
+        )
+      end
+
+      def segment(start, term, color, z = 1)
+
+        Gosu.draw_line(
+          start.x, start.y, color,
+          term.x, term.y, color, z
+        )
       end
 
       def tri(points, color, fill, z = 1)
