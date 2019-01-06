@@ -1,5 +1,5 @@
 module Volt
-  class Body < Traits
+  class Body < Params
     attr_reader :callbacks
 
     def initialize

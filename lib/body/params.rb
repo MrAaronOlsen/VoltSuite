@@ -1,5 +1,5 @@
 module Volt
-  class Traits
+  class Params
     # position
     attr_reader :pos, :trans
     # linear
@@ -10,10 +10,8 @@ module Volt
     attr_reader :damp, :restitution, :forces, :torque
     # friction
     attr_reader :static_friction, :dynamic_friction
-    # shapes
-    attr_reader :shapes, :cog
     # collision shapes
-    attr_reader :hull, :bounding
+    attr_reader :shapes, :cog, :hull, :bounding
 
     def initialize()
       @pos, @origin_angle, @trans = V.new, 0.0, Trans.new_identity
@@ -21,8 +19,7 @@ module Volt
       @angle, @a_vel, @moment = 0.0, 0.0, 0.0
       @damp, @restitution, @forces, @torque = 0.999, 1.0, V.new, 0.0
       @static_friction, @dynamic_friction = 1.0, 1.0
-      @shapes, @cog = [], V.new
-      @bounding = AABB.new(self)
+      @shapes, @cog, @bounding = [], V.new, AABB.new(self)
     end
 
   # Attribute Getters / Setters
@@ -57,37 +54,35 @@ module Volt
 
   # Transform Shape Functions
 
-    def init
-      transform(Trans.new_identity)
+    def recenter
+      hard_transform(Trans.new_translate(@pos - @trans.transform_vert(cog)))
       build
     end
 
     def offset(vect)
-      transform(Trans.new_translate(vect))
-      build
-    end
-
-    def recenter
-      transform(Trans.new_translate(@pos - trans.transform_vert(cog)))
+      hard_transform(Trans.new_translate(vect))
       build
     end
 
     def rotate(angle)
-      transform(Trans.new_rotate(angle))
+      hard_transform(Trans.new_rotate(angle))
       build
     end
 
     def scale(x, y)
-      transform(Trans.new_scale(x, y))
+      hard_transform(Trans.new_scale(x, y))
       build
     end
 
+  # Shapes
+
     def add_shape(shape)
+      shape.body = self
       @shapes << shape
     end
 
     def add_shapes(shapes)
-      shapes.each { |shape| @shapes << shape }
+      shapes.each { |shape| add_shape(shape) }
     end
 
     def build
@@ -98,16 +93,6 @@ module Volt
 
     def set_transform
       @trans = Trans.new_transform(@pos, @angle)
-    end
-
-    private
-
-    def transform(trans)
-      @shapes.each do |shape|
-        shape.transform(trans)
-      end
-
-      set_cog
     end
 
     def set_cog
@@ -121,6 +106,16 @@ module Volt
 
     def set_hull
       @hull = Hull.new(all_verts)
+    end
+
+  private
+
+    def hard_transform(trans)
+      @shapes.each do |shape|
+        shape.transform(trans)
+      end
+
+      set_cog
     end
 
     def set_i_mass(mass)

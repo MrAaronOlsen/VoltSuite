@@ -12,6 +12,7 @@ RSpec.describe VectorMath do
   end
 
   describe "#normal_towards"  do
+    # is also described as the triple product.
 
     it "Can find the normal most towards a point case one" do
       a = V.new(10, 0)
@@ -77,6 +78,24 @@ RSpec.describe VectorMath do
 
   describe '#averages' do
 
+    context 'point' do
+      before do
+        @points = [V.new(0, 0)]
+      end
+
+      it 'can find average' do
+        average = VectMath.average(@points)
+
+        expect(average).to eq(V.new(0, 0))
+      end
+
+      it 'can find area average' do
+        average = VectMath.area_average(@points)
+
+        expect(average).to eq(V.new(0, 0))
+      end
+    end
+
     context 'segment' do
       before do
         @points = [V.new(-5, 0), V.new(5, 0)]
@@ -128,6 +147,45 @@ RSpec.describe VectorMath do
         average = VectMath.area_average(@points)
 
         expect(average).to eq(V.new(0, 0))
+      end
+    end
+
+    context 'rectangle' do
+      before do
+        @points = [V.new(-10, -5), V.new(10, -5), V.new(10, 5), V.new(-10, 5)]
+      end
+
+      it 'can find average' do
+        average = VectMath.average(@points)
+
+        expect(average).to eq(V.new(0, 0))
+      end
+
+      it 'can find area average' do
+        average = VectMath.area_average(@points)
+
+        expect(average).to eq(V.new(0, 0))
+      end
+    end
+
+    context 'polygon' do
+      before do
+        @points = [V.new(-5, -5), V.new(5, -5), V.new(5, 0), V.new(5, 5), V.new(-5, 5)]
+      end
+
+      # Getting the normal average can be skewed when extra points weigh down a side. This is really just a square
+      # but with an extra vert on one side. This causes the center to move towards that side.
+      it 'can find average' do
+        average = VectMath.average(@points)
+
+        expect(average).to eq(V.new(1, 0))
+      end
+
+      # The area average uses the normal average but weights them based on area, giving us a more accurate center.
+      it 'can find area average' do
+        average = VectMath.area_average(@points)
+
+        expect(average).to be_within_vect(0.0001).of(V.new(0, 0))
       end
     end
   end

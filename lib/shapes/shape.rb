@@ -16,7 +16,6 @@ module Volt
 
     def body=(body)
       @body = body
-      body.add_shape(self)
     end
 
     def mass=(mass)

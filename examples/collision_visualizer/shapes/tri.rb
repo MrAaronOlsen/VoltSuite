@@ -13,7 +13,7 @@ module GJKShapes
         b.add_shape(@shape)
       end
 
-      @body.init
+      @body.build
       @body.recenter
 
       @color = Canvas::Colors.green
