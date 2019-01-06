@@ -1,1 +1,0 @@
-require_relative 'Collision_visualizer/run.rb'

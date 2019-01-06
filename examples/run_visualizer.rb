@@ -1,0 +1,1 @@
+require_relative 'contact_visualizer/run.rb'

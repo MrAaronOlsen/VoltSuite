@@ -1,0 +1,1 @@
+require_relative 'contact_tests/run.rb'
