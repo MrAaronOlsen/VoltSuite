@@ -10,7 +10,7 @@ module Volt
     def initialize(support1, support2)
       @support1, @support2 = support1, support2
 
-      @restitution = 0.5
+      @restitution = 0.8
     end
 
     def pre_solve

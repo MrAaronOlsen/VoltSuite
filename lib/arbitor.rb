@@ -30,9 +30,10 @@ module Volt
             next if shape2.static
 
             support1 = shape1.get_support
-            support1.transform(shape1.body.trans)
+            support1.transform(contact.body1.trans)
+            
             support2 = shape2.get_support
-            support2.transform(shape2.body.trans)
+            support2.transform(contact.body2.trans)
 
             manifold = Manifold.new(support1, support2)
 

@@ -1,17 +1,21 @@
 module Assets
   module Shapes
     class Rect
-      attr_reader :origin, :width, :height
       attr_reader :shape, :body
+      attr_accessor :origin, :width, :height
+      attr_accessor :color, :fill, :z
+      attr_accessor :mass, :moment, :vel, :a_vel
 
-      def initialize(origin, width, height)
-        @origin = origin
-        @width = width
-        @height = height
+      def initialize
+        @z = 1
+        @mass, @moment, @vel, @a_vel = 0, 0, V.new(0, 0), 0
 
+        yield(self)
         build
+      end
 
-        @color, @fill, @z = Canvas::Colors.blue, true, 1
+      def transform_all(points)
+        @body.trans.transform_all(points)
       end
 
       def build
@@ -25,7 +29,7 @@ module Assets
           body.mass = 10
           body.moment = 500
           body.vel = V.new(-800, -500)
-          body.a_vel = -100
+          body.a_vel = @a_vel
           body.damp = 0.998
         end
 
@@ -33,12 +37,8 @@ module Assets
         @body.recenter
       end
 
-      def update
-        
-      end
-
       def draw
-        Canvas::Pencil.rect(@body.trans.transform_all(@shape.verts), @color.get, @fill, @z)
+        Canvas::Pencil.rect(transform_all(@shape.verts), @color.get, @fill, @z)
       end
     end
   end

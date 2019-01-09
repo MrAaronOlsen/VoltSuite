@@ -7,6 +7,7 @@ end
 require_relative '../manifest.rb'
 
 require_all 'assets/shapes'
+require_all 'assets'
 
 require_relative 'space.rb'
 require_relative 'window.rb'
