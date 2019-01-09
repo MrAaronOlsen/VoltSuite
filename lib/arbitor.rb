@@ -3,31 +3,17 @@ module Volt
     include Structs
     attr_reader :broad_contacts, :contact_manifolds, :joint_contacts
 
-    def query(bodies, joints)
+    def initialize
       @broad_contacts = []
-      @contact_manifolds = []
-      @joint_contacts = []
-
-      collect_broad_contacts(bodies)
-      collect_contact_manifolds
-      collect_joint_contacts(joints)
+      @narrow_contacts = []
     end
 
-    def reset
+    def clear
       @broad_contacts = []
-      @contact_manifolds = []
-      @joint_contacts = []
+      @narrow_contacts = []
     end
 
-    def resolve(dt)
-      sorted_contacts = @contact_manifolds.sort_by { |manifold| manifold.penetration }
-      sorted_contacts.each { |contact| contact.resolve(dt) }
-
-      sorted_constraints = @joint_contacts.sort_by { |contact| contact.penetration }
-      sorted_constraints.each { |contact| contact.resolve(dt) }
-    end
-
-    def collect_broad_contacts(bodies)
+    def pre_solve(bodies)
       bodies.each_with_index do |body1, i|
         bodies[i+1..-1].each do |body2|
           @broad_contacts << BroadContact.new(body1, body2) if AABB.query(body1.bounding, body2.bounding)
@@ -35,7 +21,7 @@ module Volt
       end
     end
 
-    def collect_contact_manifolds
+    def solve
       @broad_contacts.each do |contact|
         contact.body1.shapes.each do |shape1|
           next if shape1.static
@@ -43,19 +29,30 @@ module Volt
           contact.body2.shapes.each do |shape2|
             next if shape2.static
 
-            handler = Contact::Dispatch.find_handler(shape1, shape2)
+            support1 = shape1.get_support
+            support1.transform(shape1.body.trans)
+            support2 = shape2.get_support
+            support2.transform(shape2.body.trans)
 
-            if handler.exists? && handler.query
-              @contact_manifolds << handler.manifold
+            manifold = Manifold.new(support1, support2)
+
+            if manifold.pre_solve && manifold.solve
+              manifold.body1 = contact.body1
+              manifold.body2 = contact.body2
+
+              @narrow_contacts << manifold
             end
           end
         end
       end
     end
 
-    def collect_joint_contacts(joints)
-      joints.each do |joint|
-        @joint_contacts << joint.manifold if joint.query
+    def resolve(dt)
+      sorted_contacts = @narrow_contacts.sort_by { |manifold| manifold.contact_depth }
+
+      sorted_contacts.each do |manifold|
+        Impulse.resolve_interpenetration(manifold, dt)
+        Impulse.resolve_velocity(manifold, dt)
       end
     end
   end

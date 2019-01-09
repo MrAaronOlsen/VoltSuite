@@ -18,6 +18,10 @@ module Volt
         @centroid = VectMath.average(@verts)
       end
 
+      def get_support
+        Support::Poly.new(@centroid, @verts)
+      end
+
       private
 
       def get_verts

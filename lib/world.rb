@@ -5,21 +5,21 @@ module Volt
 
     def initialize
       @bodies = []
-      @contacts, @joints = [], []
-      @Arbitor = Arbitor.new
+      @arbitor = Arbitor.new
     end
 
     def update(dt)
-      @dt = dt
       return if dt <= 0.0
 
-      @Arbitor.query(@bodies, @joints)
-      @contacts = @Arbitor.resolve(dt)
-      @Arbitor.reset
+      @arbitor.pre_solve(@bodies)
+      @arbitor.solve
+      @arbitor.resolve(dt)
 
       bodies.each do |body|
         body.update(dt)
       end
+
+      @arbitor.clear
     end
 
     def add_body(body)

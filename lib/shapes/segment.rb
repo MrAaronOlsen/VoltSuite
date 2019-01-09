@@ -12,6 +12,10 @@ module Volt
         @verts = [start, term]
         @centroid = VectMath.average(@verts)
       end
+
+      def get_support
+        Support::Poly.new(@centroid, @verts)
+      end
     end
 
     Seg = Segment

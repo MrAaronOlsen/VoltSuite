@@ -89,7 +89,7 @@ class Vector
   end
 
   def cross_z(z)
-	   Vector.new(-1.0 * @y * z, @x * z)
+    Vector.new(-1.0 * @y * z, @x * z)
   end
 
   def normal
