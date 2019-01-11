@@ -3,7 +3,7 @@ class Updater
   def update_mink
     return if @mink.invalid?
 
-    @gjk.solve(@mink.mink) ? @mink.active : @mink.inactive
+    @mink.contact? ? @mink.active : @mink.inactive
   end
 
   def update_shapes(mouse_support)

@@ -31,6 +31,10 @@ module GJKShapes
       @body.add_angle(degree)
     end
 
+    def get_support
+      @shape.get_support.tap { |support| support.transform(@body.trans) }
+    end
+
     def update(mouse)
       @body.pos = mouse.get_mouse_pos - mouse.offset
       @body.set_transform
@@ -42,10 +46,6 @@ module GJKShapes
 
     def world_center
       @body.trans.transform(@shape.centroid)
-    end
-
-    def get_support
-      Support::Poly.new(world_center, world_verts)
     end
 
     def draw

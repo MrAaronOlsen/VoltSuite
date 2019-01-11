@@ -15,6 +15,10 @@ module Volt
         @verts = get_verts
       end
 
+      def get_support
+        Support::Circle.new(@centroid, @radius)
+      end
+
     private
 
       def get_verts

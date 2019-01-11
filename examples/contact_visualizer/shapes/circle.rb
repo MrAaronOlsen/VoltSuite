@@ -7,13 +7,15 @@ module GJKShapes
       @radius = radius
 
       @shape = Volt::Shape::Circle.new do |shape|
-        shape.build(pos, radius)
+        shape.build(V.new(0, 0), radius)
       end
 
       @body = Body.new do |b|
         b.pos = pos
         b.add_shape(@shape)
       end
+
+      @body.build
 
       @color = Canvas::Colors.orange
       @fill = false
@@ -30,12 +32,13 @@ module GJKShapes
       @body.rotate(degree)
     end
 
-    def update(mouse)
-      @body.pos = mouse.get_mouse_pos - mouse.offset
+    def get_support
+      @shape.get_support.tap { |support| support.transform(@body.trans) }
     end
 
-    def get_support
-      Support::Circle.new(pos, @radius)
+    def update(mouse)
+      @body.pos = mouse.get_mouse_pos - mouse.offset
+      @body.set_transform
     end
 
     def draw

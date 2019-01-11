@@ -5,7 +5,7 @@ module Assets
       class << self
 
         def new_rectangle(origin)
-          Rect.new do |rec|
+          Rectangle.new do |rec|
             rec.origin = origin
             rec.width = 200
             rec.height = 200
@@ -29,6 +29,19 @@ module Assets
             seg.vel = V.new(-400, -100)
             seg.a_vel = -30
             seg.recenter = true
+          end
+        end
+
+        def new_circle(origin)
+          Circle.new do |circ|
+            circ.origin = origin
+            circ.radius = 100
+            circ.color = Canvas::Colors.green
+            circ.fill = true
+            circ.mass = 8
+            circ.moment = 500
+            circ.vel = V.new(-400, -100)
+            circ.a_vel = -30
           end
         end
       end

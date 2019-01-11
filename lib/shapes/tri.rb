@@ -12,6 +12,10 @@ module Volt
         @verts = [v1, v2, v3]
         @centroid = VectMath.average(@verts)
       end
+
+      def get_support
+        Support::Poly.new(@centroid, @verts)
+      end
     end
 
     Tri = Triangle

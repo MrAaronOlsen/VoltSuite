@@ -63,7 +63,7 @@ module Volt
     end
 
     def contact?
-      @contact
+      @contact.nil? ? false : @contact
     end
 
     def contact_normal

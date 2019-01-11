@@ -1,28 +1,27 @@
 module Assets
   module Shapes
-    class Segment
+    class Rectangle
       attr_reader :shape, :body
-      attr_accessor :origin, :start, :term
-      attr_accessor :color, :z, :recenter
+      attr_accessor :origin, :width, :height
+      attr_accessor :color, :fill, :z
       attr_accessor :mass, :moment, :vel, :a_vel
 
       def initialize
         @z = 1
         @mass, @moment, @vel, @a_vel = 0, 0, V.new(0, 0), 0
         @damp = 0.998
-        @recenter = false
 
         yield(self)
         build
       end
 
-      def transform(point)
-        @body.trans.transform(point)
+      def transform_all(points)
+        @body.trans.transform_all(points)
       end
 
       def build
-        @shape = Volt::Shape::Segment.new do |seg|
-          seg.build(@start, @term)
+        @shape = Volt::Shape::Rect.new do |rect|
+          rect.build(V.new(0, 0), @width, @height)
         end
 
         @body = Volt::Body.new do |body|
@@ -36,11 +35,11 @@ module Assets
         end
 
         @body.build
-        @body.recenter if @recenter
+        @body.recenter
       end
 
       def draw
-        Canvas::Pencil.segment(transform(@shape.verts[0]), transform(@shape.verts[1]), @color.get, @z)
+        Canvas::Pencil.rect(transform_all(@shape.verts), @color.get, @fill, @z)
       end
     end
   end

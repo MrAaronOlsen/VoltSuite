@@ -12,6 +12,10 @@ module Volt
         @verts = verts
         @centroid = VectMath.area_average(@verts)
       end
+
+      def get_support
+        Support::Poly.new(@centroid, @verts)
+      end
     end
 
     Poly = Polygon

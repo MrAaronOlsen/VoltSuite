@@ -1,5 +1,5 @@
 class Mink
-  attr_reader :shape, :body, :active, :mink
+  attr_reader :shape, :body, :active, :manifold
   attr_accessor :color, :fill, :z
 
   def initialize
@@ -19,8 +19,14 @@ class Mink
   def update
     return if invalid?
 
-    @mink = Minkowski.new(@shape1.get_support, @shape2.get_support)
-    @mink_hull = Hull.new(@mink.brute)
+    @manifold = Manifold.new(@shape1.get_support, @shape2.get_support)
+    @manifold.pre_solve
+
+    @mink_hull = Hull.new(@manifold.minkowski.brute)
+  end
+
+  def contact?
+    @manifold.contact?
   end
 
   def invalid?
