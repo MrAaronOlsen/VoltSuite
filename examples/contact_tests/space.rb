@@ -4,11 +4,11 @@ class Space
     @world = Volt::World.new
     @generator = Assets::Shapes::Generator
 
-    @shape1 = @generator.new_rectangle(V.new(300, $window_height) / 2)
-    @shape1.body.vel = V.new(400, 0)
+    @shape1 = @generator.new_circle(V.new($window_width - 300, $window_height / 2))
+    @shape1.body.vel = V.new(-400, 0)
 
-    @shape2 = @generator.new_circle(V.new($window_width - 300, $window_height / 2))
-    @shape2.body.vel = V.new(-400, 0)
+    @shape2 = @generator.new_rectangle(V.new(300, $window_height) / 2)
+    @shape2.body.vel = V.new(400, 0)
 
     @frame = Assets::Frame.new
     @assets = [@shape1, @shape2, @frame]

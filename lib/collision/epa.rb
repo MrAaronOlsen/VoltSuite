@@ -1,6 +1,6 @@
 class EPA
   attr_reader :max_iterations, :closest_edge, :depth, :normal
-  
+
   EPSILON = Math.sqrt(Epsilon.e)
 
   def initialize

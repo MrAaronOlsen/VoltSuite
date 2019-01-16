@@ -102,7 +102,12 @@ class Vector
 
   def normalize
     m = mag
-    self.tap { @x /= m; @y /= m unless m.zero? }
+
+    if m.zero?
+      self
+    else
+      self.tap { @x /= m; @y /= m }
+    end
   end
 
   def unit

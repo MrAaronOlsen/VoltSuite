@@ -31,7 +31,7 @@ module Volt
 
       if feature1.instance_of? Collision::Point
         @reference = @epa.get_closest_edge
-        @normal = @epa.get_normal
+        @normal = @epa.get_normal.flip
         @points = [feature1.point]
 
         return true
@@ -39,7 +39,7 @@ module Volt
 
       if feature2.instance_of? Collision::Point
         @reference = @epa.get_closest_edge
-        @normal = @epa.get_normal
+        @normal = @epa.get_normal.flip
         @points = [feature2.point]
 
         return true

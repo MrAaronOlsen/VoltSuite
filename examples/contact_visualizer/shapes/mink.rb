@@ -13,14 +13,25 @@ class Mink
 
     @offset = Trans.new_translate(V.new(200, 200))
 
+    @draw_contact = false
     update
   end
 
   def update
     return if invalid?
+    @draw_contact = false
 
     @manifold = Manifold.new(@shape1.get_support, @shape2.get_support)
-    @manifold.pre_solve
+    if @manifold.pre_solve
+
+      if @manifold.solve
+        @contact_points = @manifold.contact_points
+        @contact_depth = @manifold.contact_depth
+        @contact_normal = @manifold.contact_normal
+
+        @draw_contact = true
+      end
+    end
 
     @mink_hull = Hull.new(@manifold.minkowski.brute)
   end
@@ -54,6 +65,16 @@ class Mink
 
     Gosu.clip_to(50, 50, 750, 750) do
       Canvas::Pencil.poly(world_verts, world_center, @color.get, @fill, @z)
+    end
+
+    if @draw_contact
+      @contact_points.each do |point|
+        Canvas::Pencil.circle(point, 10, @color.get, true, 4)
+      end
+
+      normal_start = @offset.transform(V.new(0, 0))
+      normal_end = normal_start + @contact_normal * 100
+      Canvas::Pencil.segment(normal_start, normal_end, @color.get, 4)
     end
   end
 

@@ -53,5 +53,7 @@ class Simplex
       return -1 if winding < 0
       return 1 if winding > 0
     end
+
+    0
   end
 end
