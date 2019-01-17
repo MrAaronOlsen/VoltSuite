@@ -7,6 +7,8 @@ end
 require_relative '../manifest.rb'
 
 require_all 'assets/shapes'
+require_all 'assets/shape_menu/menu_shapes'
+require_all 'assets/shape_menu'
 require_all 'assets'
 
 require_relative 'space.rb'

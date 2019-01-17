@@ -2,7 +2,7 @@ module Assets
   module Shapes
     class Segment
       attr_reader :shape, :body
-      attr_accessor :origin, :start, :term
+      attr_accessor :pos, :line
       attr_accessor :color, :z, :recenter
       attr_accessor :mass, :moment, :vel, :a_vel
 
@@ -22,11 +22,11 @@ module Assets
 
       def build
         @shape = Volt::Shape::Segment.new do |seg|
-          seg.build(@start, @term)
+          seg.build(V.new(0, 0), @line)
         end
 
         @body = Volt::Body.new do |body|
-          body.pos = @origin
+          body.pos = @pos
           body.add_shape(@shape)
           body.mass = @mass
           body.moment = @moment

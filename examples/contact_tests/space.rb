@@ -4,19 +4,12 @@ class Space
     @world = Volt::World.new
     @generator = Assets::Shapes::Generator
 
-    @shape1 = @generator.new_segment(V.new($window_width - 300, $window_height / 2))
-    @shape1.body.vel = V.new(-800, 0)
-    @shape1.body.a_vel = 400
-
-    @shape2 = @generator.new_segment(V.new(300, $window_height) / 2)
-    @shape2.body.vel = V.new(800, 0)
-    @shape1.body.a_vel = 200
-
     @frame = Assets::Frame.new
-    @assets = [@shape1, @shape2, @frame]
+    @shape_menu_l = Assets::ShapeMenu::ShapeMenu.new(Transform.new_translate(V.new(200, $window_height / 2)))
+    @shape_menu_r = Assets::ShapeMenu::ShapeMenu.new(Transform.new_translate(V.new($window_width - 200, $window_height / 2)))
 
-    @world.add_body(@shape1.body)
-    @world.add_body(@shape2.body)
+    @assets = [@frame, @shape_menu_l, @shape_menu_r]
+
     @world.add_bodies(@frame.bodies)
 
     @dt = 1.0/60.0
