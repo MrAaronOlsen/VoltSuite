@@ -3,15 +3,15 @@ module PickerShapes
   class Circle
     attr_reader :type
 
-    def initialize(trans, spawn_pos)
+    def initialize(trans, spawn_pos, color)
       @type = "Circle"
       @trans = trans
       @spawn_pos = spawn_pos
 
       @center = V.new(0, 0)
-      @radius = 25
+      @radius = 30
 
-      @color = Canvas::Colors.orange
+      @color = color
     end
 
     def draw
@@ -19,7 +19,9 @@ module PickerShapes
     end
 
     def spawn
-      GJKShapes::Circle.new(@spawn_pos, 100)
+      GJKShapes::Circle.new(@spawn_pos).tap do |shape|
+        shape.color = @color
+      end
     end
   end
 end

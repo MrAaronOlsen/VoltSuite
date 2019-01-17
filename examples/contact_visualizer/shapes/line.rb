@@ -16,8 +16,8 @@ module GJKShapes
       @body.build
       @body.recenter
 
-      @color_off = Canvas::Colors.yellow
-      @color_on = Canvas::Colors.yellow_green
+      @color_off = Canvas::Colors.white
+      @color_on = Canvas::Colors.yellow
       @color = @color_off
 
       @fill = false

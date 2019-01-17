@@ -25,6 +25,8 @@ class Mink
 
     if @manifold.pre_solve
       @contact_data.prep(@manifold)
+    else
+      @contact_data.clear
     end
 
     @mink_hull = Hull.new(@manifold.minkowski.brute)

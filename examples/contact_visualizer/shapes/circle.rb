@@ -3,11 +3,11 @@ module GJKShapes
     attr_reader :shape, :body, :active
     attr_accessor :color, :fill, :z
 
-    def initialize(pos, radius)
-      @radius = radius
+    def initialize(pos)
+      @radius = 100
 
       @shape = Volt::Shape::Circle.new do |shape|
-        shape.build(V.new(0, 0), radius)
+        shape.build(V.new(0, 0), @radius)
       end
 
       @body = Body.new do |b|
@@ -17,7 +17,7 @@ module GJKShapes
 
       @body.build
 
-      @color = Canvas::Colors.orange
+      @color = Canvas::Colors.white
       @fill = false
       @z = 1
 

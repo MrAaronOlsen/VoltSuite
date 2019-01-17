@@ -3,13 +3,13 @@ module PickerShapes
   class Tri
     attr_reader :type
 
-    def initialize(trans, spawn_pos)
+    def initialize(trans, spawn_pos, color)
       @type = "Triangle"
       @trans = trans
       @spawn_pos = spawn_pos
 
       @tri = [V.new(25, 0), V.new(50, 50), V.new(0, 50)]
-      @color = Canvas::Colors.green
+      @color = color
     end
 
     def draw
@@ -17,7 +17,9 @@ module PickerShapes
     end
 
     def spawn
-      GJKShapes::Tri.new(@spawn_pos)
+      GJKShapes::Tri.new(@spawn_pos).tap do |shape|
+        shape.color = @color
+      end
     end
   end
 end

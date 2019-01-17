@@ -2,7 +2,7 @@ class ContactData
 
   def initialize(offset)
     @offset = offset
-    @color = Canvas::Colors.yellow
+    @color = Canvas::Colors.red
     @draw = false
   end
 
@@ -19,6 +19,10 @@ class ContactData
     end
   end
 
+  def clear
+    @draw = false
+  end
+
   def draw
     if @draw
       @points.each do |point|
@@ -27,7 +31,5 @@ class ContactData
 
       Canvas::Pencil.segment(@normal_start, @normal_end, @color.get, 5)
     end
-
-    @draw = false
   end
 end

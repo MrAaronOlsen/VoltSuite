@@ -6,13 +6,14 @@ class MenuOne
     @trans = Trans.new_translate(V.new($window_width - 650, 50))
     @selection_box = SelectionBox.new(@trans)
 
+    @color = Canvas::Colors.grey
     @spawn_pos = $window_center + V.new(100, 50)
 
-    @line = PickerShapes::Line.new(@trans * Trans.new_translate(V.new(25, 25)), @spawn_pos)
-    @tri = PickerShapes::Tri.new(@trans * Trans.new_translate(V.new(125, 25)), @spawn_pos)
-    @rect = PickerShapes::Rect.new(@trans * Trans.new_translate(V.new(225, 25)), @spawn_pos)
-    @poly = PickerShapes::Poly.new(@trans * Trans.new_translate(V.new(325, 25)), @spawn_pos)
-    @circle = PickerShapes::Circle.new(@trans * Trans.new_translate(V.new(450, 50)), @spawn_pos)
+    @line = PickerShapes::Line.new(@trans * Trans.new_translate(V.new(25, 25)), @spawn_pos, @color)
+    @tri = PickerShapes::Tri.new(@trans * Trans.new_translate(V.new(125, 25)), @spawn_pos, @color)
+    @rect = PickerShapes::Rect.new(@trans * Trans.new_translate(V.new(225, 25)), @spawn_pos, @color)
+    @poly = PickerShapes::Poly.new(@trans * Trans.new_translate(V.new(325, 25)), @spawn_pos, @color)
+    @circle = PickerShapes::Circle.new(@trans * Trans.new_translate(V.new(450, 50)), @spawn_pos, @color)
 
     @drawable = [@selection_box, @line, @tri, @rect, @poly, @circle]
     @shapes = [@line, @tri, @rect, @poly, @circle]

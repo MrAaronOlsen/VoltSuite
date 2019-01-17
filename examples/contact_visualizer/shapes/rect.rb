@@ -16,7 +16,7 @@ module GJKShapes
       @body.build
       @body.recenter
 
-      @color = Canvas::Colors.blue
+      @color = Canvas::Colors.white
       @fill = false
       @z = 1
 
