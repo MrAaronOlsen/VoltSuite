@@ -3,12 +3,14 @@ module Assets
 
     class Circle
 
-      def initialize(pos)
+      def initialize(pos, color)
         @pos = pos
+        @color = color
+        @radius = 40
       end
 
       def draw
-        Canvas::Pencil.circle(@trans.transform(@pos), @radius, @color, @fill, @z)
+        Canvas::Pencil.circle(@pos, @radius, @color.get, false, 1)
       end
     end
   end

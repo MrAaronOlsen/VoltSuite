@@ -20,6 +20,7 @@ class Window < Gosu::Window
 	end
 
 	def button_down(button)
+		binding.pry
 		close if button == Gosu::KbEscape
 
 		@space.button_down?(button)

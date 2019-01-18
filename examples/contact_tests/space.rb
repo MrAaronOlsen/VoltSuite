@@ -5,10 +5,10 @@ class Space
     @generator = Assets::Shapes::Generator
 
     @frame = Assets::Frame.new
-    @shape_menu_l = Assets::ShapeMenu::ShapeMenu.new(Transform.new_translate(V.new(200, $window_height / 2)))
-    @shape_menu_r = Assets::ShapeMenu::ShapeMenu.new(Transform.new_translate(V.new($window_width - 200, $window_height / 2)))
 
-    @assets = [@frame, @shape_menu_l, @shape_menu_r]
+    # @shape_menu = Assets::ShapeMenu::ShapeMenu.new()
+
+    @assets = [@frame]
 
     @world.add_bodies(@frame.bodies)
 
