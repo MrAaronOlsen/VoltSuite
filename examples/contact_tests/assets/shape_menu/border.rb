@@ -3,12 +3,14 @@ module Assets
     class Border
 
       def initialize(trans)
-        @origin = trans.transform(V.new(0, 0))
+        @pos = trans.transform(V.new(0, 0))
 
-        @pos = @origin + V.new(-100, -400)
-        @width = 200
+        @width = 150
         @height = 800
         @color = Canvas::Colors.white
+      end
+
+      def update
       end
 
       def draw

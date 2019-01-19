@@ -1,4 +1,4 @@
-module Listeners
+module Listener
   class OnClick
     attr_reader :key
 
@@ -8,7 +8,7 @@ module Listeners
     end
 
     def send_message(mouse)
-      @game_object.send_message(Message::OnClick.new(mouse))
+      @game_object.receive_message(Message::OnClick.new(key, mouse.get_pos))
     end
   end
 end

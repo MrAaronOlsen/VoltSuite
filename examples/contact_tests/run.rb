@@ -6,9 +6,17 @@ end
 
 require_relative '../manifest.rb'
 
+require_relative 'assets/game_object.rb'
+
+require_all 'assets/controller/messages'
+require_all 'assets/controller/listeners'
+require_all 'assets/controller'
+
 require_all 'assets/shapes'
+
 require_all 'assets/shape_menu/menu_shapes'
 require_all 'assets/shape_menu'
+
 require_all 'assets'
 
 require_relative 'space.rb'

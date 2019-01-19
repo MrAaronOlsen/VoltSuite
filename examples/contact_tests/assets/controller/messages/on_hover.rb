@@ -5,5 +5,9 @@ module Message
     def initialize(mouse)
       @mouse = mouse
     end
+
+    def get_key
+      "on_hover"
+    end
   end
 end

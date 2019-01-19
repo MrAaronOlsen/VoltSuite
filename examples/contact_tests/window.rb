@@ -19,10 +19,9 @@ class Window < Gosu::Window
 		@space.draw
 	end
 
-	def button_down(button)
-		binding.pry
-		close if button == Gosu::KbEscape
+	def button_down(event)
+		close if event == Gosu::KbEscape
 
-		@space.button_down?(button)
+		@space.query_listeners(event)
   end
 end

@@ -10,7 +10,7 @@ module Assets
     end
 
     def set_corners
-      margin = 50
+      margin = 250
 
       @trans = Transform.new_translate(V.new(margin, margin))
 
