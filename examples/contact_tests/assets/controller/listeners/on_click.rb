@@ -8,7 +8,7 @@ module Listener
     end
 
     def send_message(mouse)
-      @game_object.receive_message(Message::OnClick.new(key, mouse.get_pos))
+      @game_object.send_message(Messages::Message.new(key: @key, mouse: mouse))
     end
   end
 end

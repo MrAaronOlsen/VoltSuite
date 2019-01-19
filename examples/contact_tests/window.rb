@@ -1,5 +1,4 @@
 class Window < Gosu::Window
-	attr_reader :time_step
 
 	def initialize
     $window_width, $window_height = 1800, 1200
@@ -7,7 +6,6 @@ class Window < Gosu::Window
 
     super($window_width, $window_height, false)
     self.caption = "Contact Test Bed"
-
     @space = Space.new(self)
  	end
 

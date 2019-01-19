@@ -11,7 +11,7 @@ module Listener
 
     def send_message(mouse)
       if @gjk.solve(Minkowski.new(mouse.get_support, @game_object.get_support))
-        @game_object.receive_message(Message::OnHover.new(mouse.get_pos))
+        @game_object.send_message(Messages::Message.new(key: @key, mouse: mouse))
       end
     end
   end

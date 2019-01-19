@@ -6,11 +6,11 @@ end
 
 require_relative '../manifest.rb'
 
-require_relative 'assets/game_object.rb'
-
 require_all 'assets/controller/messages'
 require_all 'assets/controller/listeners'
 require_all 'assets/controller'
+
+require_all 'objects'
 
 require_all 'assets/shapes'
 

@@ -13,7 +13,7 @@ module Assets
       end
 
       def update
-        has_messages("on_hover") ? @fill = true : @fill = false
+        has_message("on_hover") ? @fill = true : @fill = false
         has_messages("on_hover", Gosu::MS_LEFT) ? @radius = 100 : @radius = 40
 
         clear_messages
