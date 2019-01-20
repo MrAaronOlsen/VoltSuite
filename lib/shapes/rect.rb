@@ -19,7 +19,7 @@ module Volt
       end
 
       def get_support
-        Support::Poly.new(@centroid, @verts)
+        Contact::Support::Poly.new(@centroid, @verts)
       end
 
       private

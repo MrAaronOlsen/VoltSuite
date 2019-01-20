@@ -40,9 +40,9 @@ class MenuOne
       trans = Trans.new_translate(V.new(i * 100, 0)) * @trans
       verts = trans.transform_all(@box)
 
-      support = Support::Poly.new(VectMath.average(verts), verts)
+      support = Contact::Support::Poly.new(VectMath.average(verts), verts)
 
-      if gjk.solve(Minkowski.new(mouse_support, support))
+      if gjk.solve(Contact::Minkowski.new(mouse_support, support))
         @active = Active.new(shape, trans, 0)
       end
     end

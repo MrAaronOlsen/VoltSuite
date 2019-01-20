@@ -10,7 +10,7 @@ class Updater
     @shapes.each do |shape|
       next if shape.nil?
 
-      mouse_mink = Minkowski.new(mouse_support, shape.get_support)
+      mouse_mink = Contact::Minkowski.new(mouse_support, shape.get_support)
       @gjk.solve(mouse_mink) ? shape.mouse_on : shape.mouse_off
 
       if shape.active?

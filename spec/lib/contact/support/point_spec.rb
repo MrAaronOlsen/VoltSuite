@@ -1,3 +1,5 @@
+include Contact
+
 RSpec.describe Support::Point do
 
   describe 'Without A Transform' do

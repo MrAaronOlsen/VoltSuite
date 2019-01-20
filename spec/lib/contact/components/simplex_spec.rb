@@ -1,3 +1,5 @@
+include Contact
+
 RSpec.describe Simplex do
 
   describe "Simplex" do

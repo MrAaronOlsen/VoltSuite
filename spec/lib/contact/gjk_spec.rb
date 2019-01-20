@@ -1,3 +1,5 @@
+include Contact
+
 RSpec.describe GJK do
 
   describe '#solve simple cases' do

@@ -31,11 +31,11 @@ module Volt
 
             support1 = shape1.get_support
             support1.transform(contact.body1.trans)
-            
+
             support2 = shape2.get_support
             support2.transform(contact.body2.trans)
 
-            manifold = Manifold.new(support1, support2)
+            manifold = Contact::Manifold.new(support1, support2)
 
             if manifold.pre_solve && manifold.solve
               manifold.body1 = contact.body1
@@ -52,8 +52,8 @@ module Volt
       sorted_contacts = @narrow_contacts.sort_by { |manifold| manifold.contact_depth }
 
       sorted_contacts.each do |manifold|
-        Impulse.resolve_interpenetration(manifold, dt)
-        Impulse.resolve_velocity(manifold, dt)
+        Contact::Impulse.resolve_interpenetration(manifold, dt)
+        Contact::Impulse.resolve_velocity(manifold, dt)
       end
     end
   end

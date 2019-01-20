@@ -18,12 +18,12 @@ class Controller
   end
 
   def check_active_shapes
-    active_shapes = Heap.new(lambda { |x, y| x.z <= y.z } )
+    active_shapes = VectMath::Heap.new(lambda { |x, y| x.z <= y.z } )
     @space.clear_active_shape
 
     @space.shapes.each do |shape|
       next if shape.nil?
-       
+
       if shape.active?
         shape.deactivate
       else

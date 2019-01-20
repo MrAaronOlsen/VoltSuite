@@ -1,4 +1,4 @@
-RSpec.describe Volt::Shape::Poly do
+RSpec.describe Shape::Poly do
 
   before do
     @poly = Shape::Poly.new do |shape|

@@ -1,3 +1,5 @@
+include Contact
+
 RSpec.describe Support::Circle do
 
   describe 'Without A Transform' do

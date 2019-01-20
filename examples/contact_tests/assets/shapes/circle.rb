@@ -24,7 +24,7 @@ module Assets
           circ.build(V.new(0, 0), @radius)
         end
 
-        @body = Volt::Body.new do |body|
+        @body = Body.new do |body|
           body.pos = @origin
           body.add_shape(@shape)
           body.mass = @mass

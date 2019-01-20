@@ -15,7 +15,7 @@ class Mouse
   def get_support
     mouse = get_mouse
 
-    Support::Poly.new(VectMath.average(mouse), mouse)
+    Contact::Support::Poly.new(VectMath.average(mouse), mouse)
   end
 
   def get_shape

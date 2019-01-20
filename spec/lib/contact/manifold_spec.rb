@@ -1,4 +1,6 @@
-RSpec.describe "Manifold" do
+include Contact
+
+RSpec.describe Manifold do
 
   describe 'Poly Poly' do
     it "#solve case 1" do
@@ -61,9 +63,9 @@ RSpec.describe "Manifold" do
       expect(manifold.contact_depth).to be_within(0.0001).of(0.5857)
 
       if (flipped)
-        expect(manifold.contact_normal).to be_within_vect(V.new(0.0001, 0.0001)).of(V.new(-0.7071, 0.7070))
-      else
         expect(manifold.contact_normal).to be_within_vect(V.new(0.0001, 0.0001)).of(V.new(0.7071, -0.7070))
+      else
+        expect(manifold.contact_normal).to be_within_vect(V.new(0.0001, 0.0001)).of(V.new(-0.7071, 0.7070))
       end
 
       expect(manifold.contact_points.size).to eq(1)

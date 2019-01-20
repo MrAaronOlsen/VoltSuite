@@ -26,7 +26,7 @@ module Assets
       end
 
       def get_support
-        Support::Poly.new(VectMath.average(@trans.transform_all(@shape)), @trans.transform_all(@shape))
+        Contact::Support::Poly.new(VectMath.average(@trans.transform_all(@shape)), @trans.transform_all(@shape))
       end
 
     private

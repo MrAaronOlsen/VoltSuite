@@ -1,3 +1,5 @@
+include Contact
+
 RSpec.describe Minkowski do
 
   before do

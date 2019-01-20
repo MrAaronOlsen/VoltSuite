@@ -20,7 +20,7 @@ module Assets
       end
 
       def get_support
-        Support::Circle.new(@pos, @radius)
+        Contact::Support::Circle.new(@pos, @radius)
       end
 
       def draw

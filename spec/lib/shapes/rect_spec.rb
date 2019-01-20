@@ -1,4 +1,4 @@
-RSpec.describe Volt::Shape::Rect do
+RSpec.describe Shape::Rect do
 
   before do
     @rect = Shape::Rect.new do |shape|

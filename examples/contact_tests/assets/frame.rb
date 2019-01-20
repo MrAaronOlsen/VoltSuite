@@ -12,7 +12,7 @@ module Assets
     def set_corners
       margin = 250
 
-      @trans = Transform.new_translate(V.new(margin, margin))
+      @trans = Trans.new_translate(V.new(margin, margin))
 
       @width = $window_width - margin * 2
       @height = $window_height - margin * 2

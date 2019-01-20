@@ -5,7 +5,7 @@ class Space < Updater
     @controller = Controller.new(self)
     @picker = Picker.new
 
-    @gjk = GJK.new
+    @gjk = Contact::GJK.new
     @shapes = [nil, nil]
 
     @mink = Mink.new

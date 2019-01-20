@@ -16,7 +16,7 @@ module Volt
       end
 
       def get_support
-        Support::Circle.new(@centroid, @radius)
+        Contact::Support::Circle.new(@centroid, @radius)
       end
 
     private

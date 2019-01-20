@@ -21,7 +21,7 @@ class Mink
     return if invalid?
     @draw_contact = false
 
-    @manifold = Manifold.new(@shape1.get_support, @shape2.get_support)
+    @manifold = Contact::Manifold.new(@shape1.get_support, @shape2.get_support)
 
     if @manifold.pre_solve
       @contact_data.prep(@manifold)

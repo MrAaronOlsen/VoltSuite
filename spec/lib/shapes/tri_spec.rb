@@ -1,4 +1,4 @@
-RSpec.describe Volt::Shape::Tri do
+RSpec.describe Shape::Tri do
 
   before do
     verts = [V.new(0, -10), V.new(10, 10), V.new(-10, 10)]

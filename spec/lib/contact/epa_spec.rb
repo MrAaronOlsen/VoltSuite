@@ -1,3 +1,5 @@
+include Contact
+
 RSpec.describe EPA do
 
   describe '#solve case 1' do

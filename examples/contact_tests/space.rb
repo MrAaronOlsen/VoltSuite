@@ -1,7 +1,7 @@
 class Space
 
   def initialize(window)
-    @world = Volt::World.new
+    @world = World.new
     @controller = Assets::Controller::Controller.new(window)
 
     @generator = Assets::Shapes::Generator
