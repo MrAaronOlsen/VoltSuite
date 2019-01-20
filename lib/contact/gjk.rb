@@ -3,7 +3,7 @@ module Volt
     class GJK
       attr_reader :iterations, :simplex
 
-      EPSILON = VoltMath::Epsilon.e
+      EPSILON ||= VoltMath::Epsilon.e
 
       def initialize
         @max_iterations = 30

@@ -103,17 +103,12 @@ module Volt
 
     def normalize
       m = mag
-
-      if m.zero?
-        self
-      else
-        self.tap { @x /= m; @y /= m }
-      end
+      m.zero? ? self : self.tap { @x /= m; @y /= m }
     end
 
     def unit
       m = mag
-      Vector.new(@x / m, @y / m) unless m.zero?
+      m.zero? ? self : Vector.new(@x / m, @y / m)
     end
 
     # Misc

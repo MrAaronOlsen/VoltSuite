@@ -23,7 +23,7 @@ module Messages
   class Message
     attr_reader :key, :mouse
 
-    def initialize(key: key, mouse: mouse)
+    def initialize(key:, mouse:)
       @key = key
       @mouse = mouse
     end

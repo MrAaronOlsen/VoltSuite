@@ -3,7 +3,7 @@ module Volt
     class EPA
       attr_reader :max_iterations, :closest_edge, :depth, :normal
 
-      EPSILON = Math.sqrt(VoltMath::Epsilon.e)
+      EPSILON ||= Math.sqrt(VoltMath::Epsilon.e)
 
       def initialize
         @max_interations = 100
