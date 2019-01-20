@@ -1,8 +1,9 @@
 module Assets
   class Arena
 
-    def initialize
-      @color = Canvas::Colors.red
+    def initialize(pos)
+      @pos = pos
+      @color = Canvas::Colors.green
       @walls = []
 
       set_corners
@@ -10,12 +11,10 @@ module Assets
     end
 
     def set_corners
-      margin = 250
+      @trans = Trans.new_translate(@pos)
 
-      @trans = Trans.new_translate(V.new(margin, margin))
-
-      @width = $window_width - margin * 2
-      @height = $window_height - margin * 2
+      @width = $window_width - 400
+      @height = $window_height - 200
 
       @tl = @trans.transform(V.new(0, 0))
       @tr = @trans.transform(V.new(@width, 0))

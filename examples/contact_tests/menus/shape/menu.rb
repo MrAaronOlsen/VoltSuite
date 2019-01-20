@@ -2,32 +2,40 @@ module Menus
   module Shape
     class Menu
 
-      def initialize
-        @trans = Trans.new_translate(V.new(75, 200))
+      def initialize(pos)
+        @pos = pos
+        @trans = Trans.new_translate(pos)
         @color = Canvas::Colors.white
 
-        @border = Components::Border.new(@trans)
-        increment = 800 / 5
+        shape_border_height = $window_height - 600
+        shape_border_width = 150
 
-        @circle1 = Components::Circle.new(@trans.transform(V.new(75, increment / 2)), @color)
-        @circle2 = Components::Circle.new(@trans.transform(V.new(75, increment / 2 + increment)), @color)
-        # @circle3 = MenuShapes::Circle.new(@trans.transform(V.new(0, 0)), @color)
-        # @circle4 = MenuShapes::Circle.new(@trans.transform(V.new(0, increment)), @color)
-        # @circle5 = MenuShapes::Circle.new(@trans.transform(V.new(0, increment * 2)), @color)
+        @slot_increment = shape_border_height / 5
+        @shape_border = Components::Border.new(@trans, shape_border_width, shape_border_height)
 
-        @assets = [@circle1, @circle2, @circle3, @circle4, @circle5, @border]
+        @circle1 = Components::Circle.new(slot(0), @color)
+        @circle2 = Components::Circle.new(slot(1), @color)
+        @circle3 = Components::Circle.new(slot(2), @color)
+        @circle4 = Components::Circle.new(slot(3), @color)
+        @circle5 = Components::Circle.new(slot(4), @color)
+
+        @elements = [@circle1, @circle2, @circle3, @circle4, @circle5, @shape_border]
+      end
+
+      def slot(slot)
+        @trans.transform(V.new(75, @slot_increment / 2 + (@slot_increment * slot)))
       end
 
       def update
-        @assets.each { |asset| asset.update if !asset.nil? }
+        @elements.each { |asset| asset.update if !asset.nil? }
       end
 
       def get_listeners
-        @circle1.get_listeners + @circle2.get_listeners
+        @elements.reduce([]) { |sum, element| sum + element.get_listeners }
       end
 
       def draw
-        @assets.each { |asset| asset.draw if !asset.nil? }
+        @elements.each { |asset| asset.draw if !asset.nil? }
       end
     end
   end

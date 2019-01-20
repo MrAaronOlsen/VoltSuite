@@ -4,10 +4,11 @@ class Space
     @world = World.new
 
     @controller = Controller.new(window)
-    @shape_menu = Menus::Shape::Menu.new
+
     @shape_gen = Assets::Shapes::Generator
 
-    @arena = Assets::Arena.new
+    @shape_menu = Menus::Shape::Menu.new(V.new(100, 100))
+    @arena = Assets::Arena.new(V.new(300, 100))
 
     @controller.add_listeners(@shape_menu.get_listeners)
 
