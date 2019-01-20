@@ -2,17 +2,18 @@ class Space
 
   def initialize(window)
     @world = World.new
-    @controller = Assets::Controller::Controller.new(window)
 
-    @generator = Assets::Shapes::Generator
+    @controller = Controller.new(window)
+    @shape_menu = Menus::Shape::Menu.new
+    @shape_gen = Assets::Shapes::Generator
 
-    @frame = Assets::Frame.new
-    @shape_menu = Assets::ShapeMenu::ShapeMenu.new
+    @arena = Assets::Arena.new
 
     @controller.add_listeners(@shape_menu.get_listeners)
-    @assets = [@frame, @shape_menu, @controller]
-    @world.add_bodies(@frame.bodies)
 
+    @assets = [@arena, @shape_menu, @controller]
+
+    @world.add_bodies(@arena.bodies)
     @dt = 1.0/60.0
   end
 

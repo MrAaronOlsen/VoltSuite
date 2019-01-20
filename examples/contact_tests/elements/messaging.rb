@@ -1,4 +1,4 @@
-module Messages
+module Messaging
 
   def send_message(message)
     @messages[message.key].push(message)

@@ -6,18 +6,25 @@ end
 
 require_relative '../manifest.rb'
 
-require_all 'assets/controller/messages'
-require_all 'assets/controller/listeners'
-require_all 'assets/controller'
+require_relative 'elements/messaging.rb'
+require_relative 'elements/element.rb'
 
-require_all 'objects'
+require_relative 'assets/arena.rb'
 
-require_all 'assets/shapes'
+require_relative 'assets/shapes/circle.rb'
+require_relative 'assets/shapes/rectangle.rb'
+require_relative 'assets/shapes/segment.rb'
+require_relative 'assets/shapes/generator.rb'
 
-require_all 'assets/shape_menu/menu_shapes'
-require_all 'assets/shape_menu'
+require_relative 'controller/controller.rb'
+require_relative 'controller/mouse.rb'
+require_relative 'controller/listeners/on_button.rb'
+require_relative 'controller/listeners/on_click.rb'
+require_relative 'controller/listeners/on_hover.rb'
 
-require_all 'assets'
+require_relative 'menus/shape/menu.rb'
+require_relative 'menus/shape/components/border.rb'
+require_relative 'menus/shape/components/circle.rb'
 
 require_relative 'space.rb'
 require_relative 'window.rb'

@@ -1,5 +1,5 @@
 module Assets
-  class Frame
+  class Arena
 
     def initialize
       @color = Canvas::Colors.red
