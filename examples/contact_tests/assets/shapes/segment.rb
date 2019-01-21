@@ -8,7 +8,7 @@ module Assets
 
       def initialize
         super()
-        
+
         @z = 1
         @mass, @moment, @vel, @a_vel = 0, 0, V.new(0, 0), 0
         @damp = 0.998
@@ -46,7 +46,6 @@ module Assets
 
       def get_support
         verts = @body.trans.transform_all(@body.all_verts)
-
         Contact::Support::Poly.new(VectMath.average(verts), verts)
       end
 

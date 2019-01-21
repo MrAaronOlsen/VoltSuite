@@ -15,10 +15,11 @@ module Menus
         @slot_increment = shape_border_height / 5
         @shape_border = Components::Border.new(@trans, shape_border_width, shape_border_height)
 
-        @circle = Components::Circle.new(slot(0), @color)
-        @segment = Components::Segment.new(slot(1), @color)
+        @segment = Components::Segment.new(slot(0), @color)
+        @circle = Components::Circle.new(slot(1), @color)
+        @rectangle = Components::Rectangle.new(slot(2), @color)
 
-        @elements = [@circle, @segment, @shape_border]
+        @elements = [@shape_border, @circle, @segment, @rectangle]
       end
 
       def slot(slot)

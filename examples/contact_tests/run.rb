@@ -29,6 +29,7 @@ require_relative 'menus/shape/menu.rb'
 require_relative 'menus/shape/components/border.rb'
 require_relative 'menus/shape/components/circle.rb'
 require_relative 'menus/shape/components/segment.rb'
+require_relative 'menus/shape/components/rectangle.rb'
 
 require_relative 'space.rb'
 require_relative 'window.rb'
