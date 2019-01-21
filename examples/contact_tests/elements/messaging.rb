@@ -8,6 +8,10 @@ module Messaging
     @messages.delete(key)
   end
 
+  def get_message(key)
+    @messages[key]
+  end
+
   def clear_messages
     @messages.clear
   end

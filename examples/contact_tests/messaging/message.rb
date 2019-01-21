@@ -1,5 +1,5 @@
 class Message
-  attr_reader :to, :from, :key, :mouse
+  attr_accessor :to, :from, :key, :data
 
   def initialize(to, from, key, data = nil)
     @to = to

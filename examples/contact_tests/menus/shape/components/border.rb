@@ -17,7 +17,7 @@ module Menus
           @center = VectMath.average(@points)
         end
 
-        def update
+        def update(menu)
           has_message("on_hover") ? @color = @color_on : @color = @color_off
 
           clear_messages

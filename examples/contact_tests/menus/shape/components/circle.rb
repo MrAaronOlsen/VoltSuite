@@ -12,11 +12,20 @@ module Menus
           @fill = false
         end
 
-        def update
+        def update(menu)
           has_message("on_hover") ? @fill = true : @fill = false
-          has_messages("on_hover", Gosu::MS_LEFT) ? @radius = 100 : @radius = 40
+
+          if has_messages("on_hover", Gosu::MS_LEFT)
+            Message::Queue.add_message(Message.new(menu, self, "spawn_shape", spawn_shape))
+          end
 
           clear_messages
+        end
+
+        def spawn_shape
+          Assets::Shapes::Generator.new_circle(V.new($window_width - 300, $window_height / 2)).tap do |shape|
+            shape.body.vel = V.new(-1000, -200)
+          end
         end
 
         def get_support

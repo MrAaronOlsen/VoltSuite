@@ -1,8 +1,10 @@
 module Menus
   module Shape
-    class Menu
+    class Menu < Element
 
       def initialize(pos)
+        super()
+
         @pos = pos
         @trans = Trans.new_translate(pos)
         @color = Canvas::Colors.white
@@ -15,19 +17,25 @@ module Menus
 
         @circle = Components::Circle.new(slot(0), @color)
         @segment = Components::Segment.new(slot(1), @color)
-        @circle3 = Components::Circle.new(slot(2), @color)
-        @circle4 = Components::Circle.new(slot(3), @color)
-        @circle5 = Components::Circle.new(slot(4), @color)
 
-        @elements = [@circle, @segment, @circle3, @circle4, @circle5, @shape_border]
+        @elements = [@circle, @segment, @shape_border]
       end
 
       def slot(slot)
         @trans.transform(V.new(75, @slot_increment / 2 + (@slot_increment * slot)))
       end
 
-      def update
-        @elements.each { |asset| asset.update if !asset.nil? }
+      def update(space)
+        @elements.each { |asset| asset.update(self) if !asset.nil? }
+
+        if has_message("spawn_shape")
+          message = get_message("spawn_shape")
+          message.to = space
+
+          Message::Queue.add_message(message)
+        end
+
+        clear_messages
       end
 
       def get_observers

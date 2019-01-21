@@ -21,7 +21,7 @@ module Menus
           @points = [@pos - V.new(@leangth / 2, 0), @pos + V.new(@leangth / 2, 0)]
         end
 
-        def update
+        def update(menu)
           has_message("on_hover") ? @color = @color_on : @color = @color_off
 
           if has_messages("on_hover", Gosu::MS_LEFT)
