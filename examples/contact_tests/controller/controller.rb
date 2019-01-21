@@ -2,20 +2,24 @@ class Controller
 
   def initialize(window)
     @mouse = Mouse.new(window)
-    @listeners = Hash.new { |hash, key| hash[key] = Array.new }
+    @observers = Hash.new { |hash, key| hash[key] = Array.new }
   end
 
-  def add_listeners(listeners_in)
-    listeners_in.each { |listener| @listeners[listener.key].push(listener) }
+  def add_observer(observer)
+    @observers[observer.get_key].push(observer)
+  end
+
+  def add_observers(observers)
+    observers.each { |observer| add_observer(observer) }
   end
 
   def query_events(key)
-    @listeners[key].each { |listener| listener.send_message(@mouse) if @listeners.has_key?(key) }
+    @observers[key].each { |observer| observer.look(@mouse) if @observers.has_key?(key) }
   end
 
   def update
-    query_events("on_hover")
     @mouse.update
+    query_events("on_hover")
   end
 
   def draw

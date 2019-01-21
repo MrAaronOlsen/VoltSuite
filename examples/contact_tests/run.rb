@@ -6,6 +6,9 @@ end
 
 require_relative '../manifest.rb'
 
+require_relative 'messaging/message.rb'
+require_relative 'messaging/queue.rb'
+
 require_relative 'elements/messaging.rb'
 require_relative 'elements/element.rb'
 
@@ -18,13 +21,14 @@ require_relative 'assets/shapes/generator.rb'
 
 require_relative 'controller/controller.rb'
 require_relative 'controller/mouse.rb'
-require_relative 'controller/listeners/on_button.rb'
-require_relative 'controller/listeners/on_click.rb'
-require_relative 'controller/listeners/on_hover.rb'
+require_relative 'controller/observers/on_button.rb'
+require_relative 'controller/observers/on_click.rb'
+require_relative 'controller/observers/on_hover.rb'
 
 require_relative 'menus/shape/menu.rb'
 require_relative 'menus/shape/components/border.rb'
 require_relative 'menus/shape/components/circle.rb'
+require_relative 'menus/shape/components/segment.rb'
 
 require_relative 'space.rb'
 require_relative 'window.rb'

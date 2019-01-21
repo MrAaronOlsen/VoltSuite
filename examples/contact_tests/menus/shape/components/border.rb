@@ -31,8 +31,8 @@ module Menus
           Canvas::Pencil.rect2(@pos, @width, @height, @color.get, false, 1)
         end
 
-        def get_listeners
-          [Listener::OnHover.new(self)]
+        def get_observers
+          [Observer::OnHover.new(self)]
         end
       end
     end

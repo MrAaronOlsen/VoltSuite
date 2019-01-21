@@ -13,13 +13,13 @@ module Menus
         @slot_increment = shape_border_height / 5
         @shape_border = Components::Border.new(@trans, shape_border_width, shape_border_height)
 
-        @circle1 = Components::Circle.new(slot(0), @color)
-        @circle2 = Components::Circle.new(slot(1), @color)
+        @circle = Components::Circle.new(slot(0), @color)
+        @segment = Components::Segment.new(slot(1), @color)
         @circle3 = Components::Circle.new(slot(2), @color)
         @circle4 = Components::Circle.new(slot(3), @color)
         @circle5 = Components::Circle.new(slot(4), @color)
 
-        @elements = [@circle1, @circle2, @circle3, @circle4, @circle5, @shape_border]
+        @elements = [@circle, @segment, @circle3, @circle4, @circle5, @shape_border]
       end
 
       def slot(slot)
@@ -30,8 +30,8 @@ module Menus
         @elements.each { |asset| asset.update if !asset.nil? }
       end
 
-      def get_listeners
-        @elements.reduce([]) { |sum, element| sum + element.get_listeners }
+      def get_observers
+        @elements.reduce([]) { |sum, element| sum + element.get_observers }
       end
 
       def draw

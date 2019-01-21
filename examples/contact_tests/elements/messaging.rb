@@ -1,7 +1,7 @@
 module Messaging
 
-  def send_message(message)
-    @messages[message.key].push(message)
+  def add_message(message)
+    @messages[message.key] = message
   end
 
   def remove_message(key)
@@ -18,14 +18,5 @@ module Messaging
 
   def has_messages(*keys)
     keys.all? { |key| has_message(key) }
-  end
-
-  class Message
-    attr_reader :key, :mouse
-
-    def initialize(key:, mouse:)
-      @key = key
-      @mouse = mouse
-    end
   end
 end

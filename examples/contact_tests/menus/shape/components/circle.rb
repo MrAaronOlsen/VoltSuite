@@ -27,8 +27,8 @@ module Menus
           Canvas::Pencil.circle(@pos, @radius, @color.get, @fill, 1)
         end
 
-        def get_listeners
-          [Listener::OnHover.new(self), Listener::OnClick.new(Gosu::MS_LEFT, self)]
+        def get_observers
+          [Observer::OnHover.new(self), Observer::OnClick.new(Gosu::MS_LEFT, self)]
         end
       end
     end

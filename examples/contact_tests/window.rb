@@ -20,6 +20,6 @@ class Window < Gosu::Window
 	def button_down(event)
 		close if event == Gosu::KbEscape
 
-		@space.query_listeners(event)
+		@space.query_events(event)
   end
 end
