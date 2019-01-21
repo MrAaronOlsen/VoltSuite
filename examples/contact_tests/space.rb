@@ -20,9 +20,8 @@ class Space < Element
 
   def update
     @world.update(@dt)
-    @controller.update
-    @shape_menu.update(self)
-    
+    @assets.each { |asset| asset.update(self) }
+
     check_messages
     clear_messages
 
@@ -32,9 +31,16 @@ class Space < Element
   def check_messages
     if has_message("spawn_shape")
       shape = get_message("spawn_shape").data
-
+      @controller.add_observers(shape.get_observers)
       @assets.push(shape)
       @world.add_body(shape.body)
+    end
+
+    if has_message("destroy")
+      shape = get_message("destroy").from
+
+      @assets.delete(shape)
+      @world.destroy_body(shape.body)
     end
   end
 

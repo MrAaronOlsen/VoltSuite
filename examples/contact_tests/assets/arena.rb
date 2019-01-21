@@ -48,6 +48,9 @@ module Assets
       end
     end
 
+    def update(space)
+    end
+
     def draw
       @walls.each { |wall| wall.draw }
     end

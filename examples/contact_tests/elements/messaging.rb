@@ -23,4 +23,8 @@ module Messaging
   def has_messages(*keys)
     keys.all? { |key| has_message(key) }
   end
+
+  def print_messages
+    puts keys.reduce("") { |sum, key, message| sum + " #{key} "}
+  end
 end

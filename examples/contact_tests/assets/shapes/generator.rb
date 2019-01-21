@@ -10,7 +10,7 @@ module Assets
             rec.width = 200
             rec.height = 200
             rec.color = Canvas::Colors.blue
-            rec.fill = true
+            rec.fill = false
             rec.mass = 15
             rec.moment = 500
             rec.vel = V.new(-100, -10)
@@ -37,7 +37,7 @@ module Assets
             circ.origin = origin
             circ.radius = 100
             circ.color = Canvas::Colors.green
-            circ.fill = true
+            circ.fill = false
             circ.mass = 8
             circ.moment = 500
             circ.vel = V.new(-400, -100)

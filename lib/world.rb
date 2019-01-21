@@ -30,6 +30,10 @@ module Volt
       bodies.each { |body| add_body(body) }
     end
 
+    def destroy_body(body)
+      @bodies.delete(body)
+    end
+
     def add_joint(joint)
       @joints << joint
     end

@@ -1,12 +1,14 @@
 module Assets
   module Shapes
-    class Circle
+    class Circle < Element
       attr_reader :shape, :body
       attr_accessor :origin, :radius
       attr_accessor :color, :fill, :z
       attr_accessor :mass, :moment, :vel, :a_vel
 
       def initialize
+        super()
+
         @z = 1
         @mass, @moment, @vel, @a_vel = 0, 0, V.new(0, 0), 0
         @damp = 0.998
@@ -36,6 +38,24 @@ module Assets
 
         @body.build
         @body.recenter
+      end
+
+      def get_support
+        Contact::Support::Circle.new(@body.pos, @shape.radius)
+      end
+
+      def update(space)
+        has_message("on_hover") ? @fill = true : @fill = false
+
+        if has_messages("on_hover", Gosu::MS_LEFT)
+          Message::Queue.add_message(Message.new(space, self, "destroy"))
+        end
+
+        clear_messages
+      end
+
+      def get_observers
+        [Observer::OnHover.new(self), Observer::OnClick.new(Gosu::MS_LEFT, self)]
       end
 
       def draw

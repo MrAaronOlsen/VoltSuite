@@ -17,7 +17,7 @@ class Controller
     @observers[key].each { |observer| observer.look(@mouse) if @observers.has_key?(key) }
   end
 
-  def update
+  def update(space)
     @mouse.update
     query_events("on_hover")
   end
