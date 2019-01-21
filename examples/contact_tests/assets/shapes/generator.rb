@@ -9,7 +9,7 @@ module Assets
             rec.origin = origin
             rec.width = 200
             rec.height = 200
-            rec.color = Canvas::Colors.blue
+            rec.color = Canvas::Colors.white
             rec.fill = false
             rec.mass = 15
             rec.moment = 500
@@ -21,9 +21,8 @@ module Assets
         def new_segment(origin)
           Segment.new do |seg|
             seg.origin = origin
-            seg.start = V.new(0, 0)
-            seg.term = V.new(-200, 0)
-            seg.color = Canvas::Colors.yellow
+            seg.line = V.new(-200, 0)
+            seg.color = Canvas::Colors.white
             seg.mass = 8
             seg.moment = 500
             seg.vel = V.new(-400, -100)
@@ -36,7 +35,7 @@ module Assets
           Circle.new do |circ|
             circ.origin = origin
             circ.radius = 100
-            circ.color = Canvas::Colors.green
+            circ.color = Canvas::Colors.white
             circ.fill = false
             circ.mass = 8
             circ.moment = 500

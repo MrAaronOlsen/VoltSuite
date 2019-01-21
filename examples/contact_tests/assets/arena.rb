@@ -24,25 +24,25 @@ module Assets
 
     def build
       @walls << Shapes::Segment.new do |seg|
-        seg.pos = @tl
+        seg.origin = @tl
         seg.line = V.new(@width, 0)
         seg.color = @color
       end
 
       @walls << Shapes::Segment.new do |seg|
-        seg.pos = @tr
+        seg.origin = @tr
         seg.line = V.new(0, @height)
         seg.color = @color
       end
 
       @walls << Shapes::Segment.new do |seg|
-        seg.pos = @br
+        seg.origin = @br
         seg.line = V.new(-@width, 0)
         seg.color = @color
       end
 
       @walls << Shapes::Segment.new do |seg|
-        seg.pos = @bl
+        seg.origin = @bl
         seg.line = V.new(0, -@height)
         seg.color = @color
       end

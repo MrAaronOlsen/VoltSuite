@@ -25,16 +25,16 @@ module Menus
           has_message("on_hover") ? @color = @color_on : @color = @color_off
 
           if has_messages("on_hover", Gosu::MS_LEFT)
-            @leangth = 120
-            build
-          else
-            if @leangth != 80
-              @leangth = 80
-              build
-            end
+            Message::Queue.add_message(Message.new(menu, self, "spawn_shape", spawn_shape))
           end
 
           clear_messages
+        end
+
+        def spawn_shape
+          Assets::Shapes::Generator.new_segment(V.new($window_width - 300, $window_height / 2)).tap do |shape|
+            shape.body.vel = V.new(-1000, -200)
+          end
         end
 
         def get_support
