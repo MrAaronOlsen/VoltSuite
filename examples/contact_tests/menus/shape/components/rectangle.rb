@@ -3,19 +3,15 @@ module Menus
     module Components
       class Rectangle < Element
 
-        def initialize(pos, color)
+        def initialize(pos)
           super()
 
-          @pos = pos
-          @trans = Trans.new_translate(@pos)
-
-          @color = color
-          @fill = false
-
+          @trans = Trans.new_translate(pos)
           @width = 80
           @height = 80
 
           @color = Canvas::Colors.white
+          @fill = false
 
           build
         end

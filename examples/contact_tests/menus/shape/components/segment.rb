@@ -3,22 +3,22 @@ module Menus
     module Components
       class Segment < Element
 
-        def initialize(pos, color)
+        def initialize(pos)
           super()
 
-          @pos = pos
-          @color = color
+          @trans = Trans.new_translate(pos)
           @leangth = 80
 
+          @color = Canvas::Colors.white
           @color_on = Canvas::Colors.yellow
           @color_off = Canvas::Colors.white
-          @color = @color_off
 
           build
         end
 
         def build
-          @points = [@pos - V.new(@leangth / 2, 0), @pos + V.new(@leangth / 2, 0)]
+          @points = @trans.transform_all([V.new(-@leangth / 2, 0), V.new(@leangth / 2, 0)])
+          @center = VectMath.average(@points)
         end
 
         def update(menu)
@@ -38,7 +38,7 @@ module Menus
         end
 
         def get_support
-          Contact::Support::Poly.new(@pos, @points)
+          Contact::Support::Poly.new(@center, @points)
         end
 
         def draw
