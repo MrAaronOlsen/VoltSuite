@@ -5,13 +5,24 @@ class Origin
     @grid_color.fade(-150)
 
     @area_color = Canvas::Colors.white
+    @trans = Trans.new_translate(V.new(50, 50))
 
-    @x = [V.new(50, 200), V.new(800, 200)]
-    @y = [V.new(200, 50), V.new(200, 800)]
+    @x = @trans.transform_all([V.new(0, 350), V.new(700, 350)])
+    @y = @trans.transform_all([V.new(350, 0), V.new(350, 700)])
 
-    @area = [V.new(50, 50), V.new(800, 50), V.new(800, 800), V.new(50, 800)]
+    @area = @trans.transform_all([V.new, V.new(700, 0), V.new(700, 700), V.new(0, 700)])
+
+    @origin_trans = Trans.new_translate(V.new(350, 350)) * @trans
 
     @z = 0
+  end
+
+  def get_origin_trans
+    @origin_trans
+  end
+
+  def get_clip_corners
+    [@area[0], @area[2]]
   end
 
   def draw

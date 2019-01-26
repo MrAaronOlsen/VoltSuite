@@ -34,6 +34,10 @@ module Volt
         @simplex.last
       end
 
+      def get_all
+        @simplex[0..2]
+      end
+
       def build_edges
          size = get_size
 

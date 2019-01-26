@@ -8,10 +8,11 @@ class Space < Updater
     @gjk = Contact::GJK.new
     @shapes = [nil, nil]
 
-    @mink = Mink.new
+    @origin = Origin.new
+    @mink = Mink.new(@origin)
     @mouse = Mouse.new(window)
 
-    @drawable = [@mouse, @mink, @picker, Origin.new, ShapeArea.new]
+    @drawable = [@mouse, @mink, @picker, @origin, ShapeArea.new]
   end
 
   def update

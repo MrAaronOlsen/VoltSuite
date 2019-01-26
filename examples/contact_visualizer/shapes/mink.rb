@@ -2,7 +2,10 @@ class Mink
   attr_reader :shape, :body, :active
   attr_accessor :color, :fill, :z
 
-  def initialize
+  def initialize(origin)
+    @offset = origin.get_origin_trans
+    @clip = origin.get_clip_corners
+
     @shape1 = @shape2 = nil
 
     @color_off = Canvas::Colors.white
@@ -11,7 +14,6 @@ class Mink
     @fill = false
     @z = 1
 
-    @offset = Trans.new_translate(V.new(200, 200))
     @contact_data = ContactData.new(@offset)
 
     update
@@ -19,8 +21,6 @@ class Mink
 
   def update
     return if invalid?
-    @draw_contact = false
-
     @manifold = Contact::Manifold.new(@shape1.get_support, @shape2.get_support)
 
     if @manifold.pre_solve
@@ -59,11 +59,13 @@ class Mink
   def draw
     return if invalid?
 
-    Gosu.clip_to(50, 50, 750, 750) do
+    Gosu.clip_to(50, 50, 700, 700) do
       Canvas::Pencil.poly(world_verts, world_center, @color.get, @fill, @z)
+
+      @contact_data.draw
     end
 
-    @contact_data.draw
+
   end
 
   def set_shapes(shape1, shape2)
