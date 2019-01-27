@@ -1,7 +1,7 @@
 module Volt
   module Contact
     class EPA
-      attr_reader :max_iterations, :closest_edge, :depth, :normal
+      attr_reader :max_iterations, :closest_edge, :depth, :normal, :polytope
 
       EPSILON ||= Math.sqrt(VoltMath::Epsilon.e)
 
@@ -24,11 +24,11 @@ module Volt
       def solve(minkowski, simplex)
         winding = simplex.get_winding
 
-        polytope = Polytope.new
-        polytope.add_all(simplex.build_edges)
+        @polytope = Polytope.new
+        @polytope.add_all(simplex.build_edges)
 
         @max_interations.times do |i|
-          edge = polytope.see_closest_edge
+          edge = @polytope.see_closest_edge
           point = minkowski.get_support(edge.normal * winding)
 
           projection = point.dot(edge.normal * winding)
@@ -41,7 +41,7 @@ module Volt
 
             return true
           else
-            polytope.expand(point)
+            @polytope.expand(point)
           end
         end
 

@@ -3,14 +3,17 @@ class ContactData
   def initialize(offset)
     @offset = offset
     @points_color = Canvas::Colors.red
+
     @normal_color = Canvas::Colors.blue
     @simplex_color = Canvas::Colors.green
+    @polytope_color = Canvas::Colors.yellow
     @draw = false
   end
 
   def prep(manifold)
     if manifold.solve
       @simplex = @offset.transform_all(manifold.gjk.simplex.get_all)
+      @polytope = Hull.new(@offset.transform_all(manifold.epa.polytope.get_all))
 
       @points = manifold.contact_points
       @depth = manifold.contact_depth
@@ -34,6 +37,7 @@ class ContactData
       end
 
       Canvas::Pencil.tri(@simplex, @simplex_color.get, false, 5)
+      Canvas::Pencil.poly(@polytope.verts, VectMath.average(@polytope.verts), @polytope_color.get, false, 6)
       Canvas::Pencil.segment(@normal_start, @normal_end, @normal_color.get, 5)
     end
   end

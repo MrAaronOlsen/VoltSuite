@@ -27,6 +27,10 @@ module Volt
       max
     end
 
+    def dump
+      edges = @nodes.select { |node| !node.nil? }
+    end
+
     def pop_many(number)
       [].tap do |results|
         number.times do

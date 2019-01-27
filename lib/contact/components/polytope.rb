@@ -23,6 +23,15 @@ module Volt
         @heap.pop
       end
 
+      def get_all
+        [].tap do |all|
+          @heap.dump.each do |edge|
+            all << edge.start
+            all << edge.terminus
+          end
+        end.uniq
+      end
+
       def expand(point)
         current_edge = @heap.pop
 
