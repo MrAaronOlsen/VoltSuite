@@ -48,10 +48,9 @@ class Controller
   end
 
   def check_picker
-    active = @space.picker.active
-
-    if !active.nil?
-      @space.replace_shape(active.index, active.shape.spawn)
+    if @space.picker.has_selection?
+      selection = @space.picker.selection
+      @space.replace_shape(selection.index, selection.shape.spawn)
     end
   end
 end
