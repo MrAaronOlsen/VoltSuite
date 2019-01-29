@@ -3,11 +3,9 @@ module PickerShapes
     attr_reader :type
 
     def initialize(trans, spawn_pos, color)
-      @type = "Line"
-      @trans = trans
       @spawn_pos = spawn_pos
 
-      @line = @trans.transform_all([V.new(0, 0), V.new(50, 50)])
+      @line = trans.transform_all([V.new(-25, -25), V.new(25, 25)])
       @color = color
     end
 

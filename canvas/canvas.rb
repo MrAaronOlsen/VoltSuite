@@ -4,6 +4,7 @@ require_relative './core/sprite.rb'
 require_relative './core/drawer.rb'
 require_relative './core/pencil.rb'
 require_relative './core/draw.rb'
+require_relative './core/clip_area.rb'
 
 require_relative './modules/contact.rb'
 

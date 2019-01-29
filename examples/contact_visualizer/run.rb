@@ -6,9 +6,9 @@ end
 
 require_relative '../manifest.rb'
 
-require_relative 'updater.rb'
 require_relative 'controller.rb'
 
+require_all 'areas'
 require_all 'picker'
 require_all 'shapes'
 

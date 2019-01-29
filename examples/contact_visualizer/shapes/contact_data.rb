@@ -2,27 +2,20 @@ class ContactData
 
   def initialize(offset)
     @offset = offset
-    @points_color = Canvas::Colors.red
+    
+    @assets = [
+      ContactPoints.new(@offset),
+      Simplex.new(@offset),
+      Polytope.new(@offset),
+      ContactNormal.new(@offset)
+    ]
 
-    @normal_color = Canvas::Colors.blue
-    @simplex_color = Canvas::Colors.green
-    @polytope_color = Canvas::Colors.yellow
     @draw = false
   end
 
   def prep(manifold)
-    if manifold.solve
-      @simplex = @offset.transform_all(manifold.gjk.simplex.get_all)
-      @polytope = Hull.new(@offset.transform_all(manifold.epa.polytope.get_all))
-
-      @points = manifold.contact_points
-      @depth = manifold.contact_depth
-      @normal = manifold.contact_normal
-
-      @normal_start = @offset.transform(V.new(0, 0))
-      @normal_end = @normal_start - @normal * @depth
-
-      @draw = true
+    if @draw = manifold.solve
+      @assets.each { |asset| asset.update(manifold) }
     end
   end
 
@@ -31,14 +24,72 @@ class ContactData
   end
 
   def draw
-    if @draw
-      @points.each do |point|
-        Canvas::Pencil.circle(point, 10, @points_color.get, true, 5)
-      end
+    @assets.each { |asset| asset.draw } if @draw
+  end
 
-      Canvas::Pencil.tri(@simplex, @simplex_color.get, false, 5)
-      Canvas::Pencil.poly(@polytope.verts, VectMath.average(@polytope.verts), @polytope_color.get, false, 6)
-      Canvas::Pencil.segment(@normal_start, @normal_end, @normal_color.get, 5)
+  # Helper Classes
+  class ContactPoints
+    def initialize(offset)
+      @offset = offset
+      @points = []
+      @color = Canvas::Colors.red
+    end
+
+    def update(manifold)
+      @points = manifold.contact_points
+    end
+
+    def draw
+      @points.each { |point| Canvas::Pencil.circle(point, 10, @color.get, true, 5) }
+    end
+  end
+
+  class ContactNormal
+    def initialize(offset)
+      @offset = offset
+      @start = @offset.transform(V.new)
+      @color = Canvas::Colors.blue
+    end
+
+    def update(manifold)
+      @end = @start - manifold.contact_normal * manifold.contact_depth
+    end
+
+    def draw
+      Canvas::Pencil.segment(@start, @end, @color.get, 5)
+    end
+  end
+
+  class Simplex
+    def initialize(offset)
+      @offset = offset
+      @simplex = []
+      @color = Canvas::Colors.green
+    end
+
+    def update(manifold)
+      @simplex = @offset.transform_all(manifold.gjk.simplex.get_all)
+    end
+
+    def draw
+      Canvas::Pencil.tri(@simplex, @color.get, false, 5)
+    end
+  end
+
+  class Polytope
+    def initialize(offset)
+      @offset = offset
+      @polytope, @center = [], V.new
+      @color = Canvas::Colors.yellow
+    end
+
+    def update(manifold)
+      @polytope = Hull.new(@offset.transform_all(manifold.epa.polytope.get_all)).verts
+      @center = VectMath.average(@polytope)
+    end
+
+    def draw
+      Canvas::Pencil.poly(@polytope, @center, @color.get, false, 6)
     end
   end
 end

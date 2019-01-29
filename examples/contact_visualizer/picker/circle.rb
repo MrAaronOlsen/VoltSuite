@@ -4,18 +4,15 @@ module PickerShapes
     attr_reader :type
 
     def initialize(trans, spawn_pos, color)
-      @type = "Circle"
-      @trans = trans
       @spawn_pos = spawn_pos
-
-      @center = V.new(0, 0)
-      @radius = 30
-
       @color = color
+
+      @center = trans.transform(V.new())
+      @radius = 30
     end
 
     def draw
-      Canvas::Pencil.circle(@trans.transform(@center), @radius, @color.get, true, 1)
+      Canvas::Pencil.circle(@center, @radius, @color.get, true, 1)
     end
 
     def spawn

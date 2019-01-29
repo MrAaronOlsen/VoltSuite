@@ -1,4 +1,4 @@
-class Space < Updater
+class Space
   attr_reader :shapes, :active_shape, :mouse, :picker
 
   def initialize(window)
@@ -8,18 +8,19 @@ class Space < Updater
     @gjk = Contact::GJK.new
     @shapes = [nil, nil]
 
-    @origin = Origin.new
-    @mink = Mink.new(@origin)
     @mouse = Mouse.new(window)
 
-    @drawable = [@mouse, @mink, @picker, @origin, ShapeArea.new]
+    @shape_area = Areas::Shape.new(Trans.new_translate(V.new(800, 150)))
+    @contact_area = Areas::Contact.new(Trans.new_translate(V.new(50, 150)))
+
+    @drawable = [@mouse, @picker, @shape_area, @contact_area]
   end
 
   def update
     mouse_support = @mouse.get_support
 
     @controller.update
-    update_mink
+    update_contact_area
     update_shapes(mouse_support)
     @picker.update(@gjk, mouse_support)
   end
@@ -38,7 +39,7 @@ class Space < Updater
 
   def replace_shape(index, shape)
     @shapes[index] = shape
-    @mink.set_shapes(@shapes[0], @shapes[1])
+    @contact_area.set_shapes(@shapes[0], @shapes[1])
   end
 
   def set_active_shape(active_shape)
@@ -47,5 +48,24 @@ class Space < Updater
 
   def clear_active_shape
     @active_shape = nil
+  end
+
+  def update_contact_area
+    return if @contact_area.invalid?
+    @contact_area.contact? ? @contact_area.active : @contact_area.inactive
+  end
+
+  def update_shapes(mouse_support)
+    @shapes.each do |shape|
+      next if shape.nil?
+
+      mouse_mink = Contact::Minkowski.new(mouse_support, shape.get_support)
+      @gjk.solve(mouse_mink) ? shape.mouse_on : shape.mouse_off
+
+      if shape.active?
+        shape.update(@mouse)
+        @contact_area.update
+      end
+    end
   end
 end
