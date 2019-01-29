@@ -1,7 +1,6 @@
 module PickerShapes
-
   class Circle
-    attr_reader :type
+    attr_reader :selection
 
     def initialize(trans, spawn_pos, color)
       @spawn_pos = spawn_pos
@@ -9,6 +8,8 @@ module PickerShapes
 
       @center = trans.transform(V.new())
       @radius = 30
+
+      @selection = Selection.new(trans)
     end
 
     def draw

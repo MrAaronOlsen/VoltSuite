@@ -1,10 +1,9 @@
 class Menu
-  attr_reader :selection
-  attr_accessor :trans
+  attr_reader :index
 
   def initialize(trans, spawn_pos, index)
-    @trans = trans
     @index = index
+    @trans = trans
     @spawn_pos = $window_center + spawn_pos
 
     @color = Canvas::Colors.grey
@@ -20,8 +19,6 @@ class Menu
     @drawable = [@border, @line, @tri, @rect, @poly, @circle]
     @shapes = [@line, @tri, @rect, @poly, @circle]
 
-    @selection = SelectionBox.new
-
     @active = nil
   end
 
@@ -31,28 +28,13 @@ class Menu
 
   def draw
     @drawable.each { |thing| thing.draw }
-
-    if @selection.active?
-      @selection.draw
-    end
   end
 
   def update(gjk, mouse_support)
-    @selection.clear
-
-    @shapes.each_with_index do |shape, i|
-      trans = @trans * Trans.new_translate(V.new(i * 100, 0))
-      verts = trans.transform_all(@selection.verts)
-
-      support = Contact::Support::Poly.new(VectMath.average(verts), verts)
-
-      if gjk.solve(Contact::Minkowski.new(mouse_support, support))
-        @selection.update(shape, trans, @index)
-        return true
-      end
+    @shapes.find do |shape|
+      selection = shape.selection
+      gjk.solve(Contact::Minkowski.new(mouse_support, selection.support))
     end
-
-    false
   end
 
   class Border
@@ -66,35 +48,6 @@ class Menu
 
     def draw
       Canvas::Pencil.rect(@trans.transform_all(@box), @color.get, false, 1)
-    end
-  end
-
-  class SelectionBox
-    attr_reader :shape, :index
-    attr_reader :verts
-
-    def initialize
-      @verts = [V.new(0, 0), V.new(100, 0), V.new(100, 100), V.new(0, 100)]
-      @color = Canvas::Colors.red
-      @color.fade(-150)
-    end
-
-    def clear
-      @trans = nil
-    end
-
-    def active?
-      !@trans.nil?
-    end
-
-    def update(shape, trans, index)
-      @shape = shape
-      @trans = trans
-      @index = index
-    end
-
-    def draw
-      Canvas::Pencil.rect(@trans.transform_all(@verts), @color.get, false, 3)
     end
   end
 end

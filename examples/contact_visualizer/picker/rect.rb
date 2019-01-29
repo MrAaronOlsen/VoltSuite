@@ -1,11 +1,14 @@
 module PickerShapes
   class Rect
+    attr_reader :selection
 
     def initialize(trans, spawn_pos, color)
       @spawn_pos = spawn_pos
       @color = color
 
       @rect = trans.transform_all([V.new(-25, -25), V.new(25, -25), V.new(25, 25), V.new(-25, 25)])
+
+      @selection = Selection.new(trans)
     end
 
     def draw

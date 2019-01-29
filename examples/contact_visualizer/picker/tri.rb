@@ -1,13 +1,14 @@
 module PickerShapes
-
   class Tri
-    attr_reader :type
+    attr_reader :selection
 
     def initialize(trans, spawn_pos, color)
       @spawn_pos = spawn_pos
       @color = color
 
       @tri = trans.transform_all([V.new(-25, -25), V.new(25, -25), V.new(0, 25)])
+
+      @selection = Selection.new(trans)
     end
 
     def draw

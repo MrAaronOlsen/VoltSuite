@@ -9,24 +9,28 @@ class Picker
     @menu2 = Menu.new(menu2_trans, V.new(600, 50), 1)
 
     @menus = [@menu1, @menu2]
-    @active = nil
+    @selection = ActiveSelection.new
   end
 
   def draw
+    @selection.draw
     @menus.each { |menu| menu.draw }
   end
 
   def update(gjk, mouse_support)
-    @selection = nil
+    @selection.clear
 
     @menus.each do |menu|
-      if menu.update(gjk, mouse_support)
-        @selection = menu.selection
+      shape = menu.update(gjk, mouse_support)
+
+      if !shape.nil?
+        @selection.set(shape, menu.index)
+        break
       end
     end
   end
 
   def has_selection?
-    !@selection.nil?
+    @selection.active?
   end
 end

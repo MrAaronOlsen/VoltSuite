@@ -1,12 +1,14 @@
 module PickerShapes
   class Line
-    attr_reader :type
+    attr_reader :selection
 
     def initialize(trans, spawn_pos, color)
       @spawn_pos = spawn_pos
 
       @line = trans.transform_all([V.new(-25, -25), V.new(25, 25)])
       @color = color
+
+      @selection = Selection.new(trans)
     end
 
     def draw

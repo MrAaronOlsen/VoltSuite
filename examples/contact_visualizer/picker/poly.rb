@@ -1,5 +1,6 @@
 module PickerShapes
   class Poly
+    attr_reader :selection
 
     def initialize(trans, spawn_pos, color)
       @spawn_pos = spawn_pos
@@ -7,6 +8,8 @@ module PickerShapes
 
       @poly = trans.transform_all(centered_poly)
       @center = trans.transform(@center)
+
+      @selection = Selection.new(trans)
     end
 
     def centered_poly
