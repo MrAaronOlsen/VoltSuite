@@ -1,1 +1,1 @@
-require_relative 'contact_visualizer/run.rb'
+require './examples/contact_visualizer/run.rb'

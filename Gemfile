@@ -1,10 +1,10 @@
 source 'https://rubygems.org'
 
-ruby '2.5.0'
+ruby '2.6.5'
 
-gem 'gosu', '>=0.13.3'
-gem 'pry', '<=0.11.0'
-gem 'pry-nav', '>=0.2.4'
+gem 'gosu', '~> 0.14.5'
+gem 'pry', '~> 0.12.2'
+gem 'pry-nav', '~> 0.3.0'
 gem 'colorize'
 
 group :test do

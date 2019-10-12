@@ -1,1 +1,1 @@
-require_relative 'contact_tests/run.rb'
+require './examples/contact_tests/run.rb'
