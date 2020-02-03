@@ -7,7 +7,7 @@ module Assets
         def new_circle(origin)
           Circle.new do |circ|
             circ.origin = origin
-            circ.radius = 100
+            circ.radius = 50
             circ.color = Canvas::Colors.white
             circ.fill = true
             circ.mass = 8
@@ -20,7 +20,7 @@ module Assets
         def new_segment(origin)
           Segment.new do |seg|
             seg.origin = origin
-            seg.line = V.new(-200, 0)
+            seg.line = V.new(-100, 0)
             seg.color = Canvas::Colors.white
             seg.mass = 8
             seg.moment = 500
@@ -33,8 +33,8 @@ module Assets
         def new_triangle(origin)
           Triangle.new do |pol|
             pol.origin = origin
-            pol.height = 200
-            pol.width = 200
+            pol.height = 100
+            pol.width = 100
             pol.color = Canvas::Colors.white
             pol.fill = true
             pol.mass = 15
@@ -47,8 +47,8 @@ module Assets
         def new_rectangle(origin)
           Rectangle.new do |rec|
             rec.origin = origin
-            rec.width = 200
-            rec.height = 200
+            rec.width = 100
+            rec.height = 100
             rec.color = Canvas::Colors.white
             rec.fill = true
             rec.mass = 15
@@ -61,7 +61,7 @@ module Assets
         def new_polygon(origin)
           Polygon.new do |pol|
             pol.origin = origin
-            pol.radius = 100
+            pol.radius = 50
             pol.color = Canvas::Colors.white
             pol.fill = true
             pol.mass = 15

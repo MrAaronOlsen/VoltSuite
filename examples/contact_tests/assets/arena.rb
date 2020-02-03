@@ -13,8 +13,8 @@ module Assets
     def set_corners
       @trans = Trans.new_translate(@pos)
 
-      @width = $window_width - 400
-      @height = $window_height - 200
+      @width = $window_width - 300
+      @height = $window_height - 100
 
       @tl = @trans.transform(V.new(0, 0))
       @tr = @trans.transform(V.new(@width, 0))

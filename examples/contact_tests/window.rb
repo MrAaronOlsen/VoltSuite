@@ -1,7 +1,7 @@
 class Window < Gosu::Window
 
 	def initialize
-    $window_width, $window_height = 1800, 1200
+    $window_width, $window_height = 1000, 700
 		$window_center = V.new($window_width / 2, $window_height / 2)
 
     super($window_width, $window_height, false)

@@ -2,7 +2,7 @@ class ContactData
 
   def initialize(offset)
     @offset = offset
-    
+
     @assets = [
       ContactPoints.new(@offset),
       Simplex.new(@offset),
@@ -40,7 +40,7 @@ class ContactData
     end
 
     def draw
-      @points.each { |point| Canvas::Pencil.circle(point, 10, @color.get, true, 5) }
+      @points.each { |point| Canvas::Pencil.circle(point, 10, @color.get, true, 9) }
     end
   end
 
@@ -48,7 +48,7 @@ class ContactData
     def initialize(offset)
       @offset = offset
       @start = @offset.transform(V.new)
-      @color = Canvas::Colors.blue
+      @color = Canvas::Colors.red
     end
 
     def update(manifold)
@@ -56,7 +56,7 @@ class ContactData
     end
 
     def draw
-      Canvas::Pencil.segment(@start, @end, @color.get, 5)
+      Canvas::Pencil.segment(@start, @end, @color.get, 7)
     end
   end
 
@@ -72,7 +72,7 @@ class ContactData
     end
 
     def draw
-      Canvas::Pencil.tri(@simplex, @color.get, false, 5)
+      Canvas::Pencil.tri(@simplex, @color.get, true, 7)
     end
   end
 
@@ -89,7 +89,7 @@ class ContactData
     end
 
     def draw
-      Canvas::Pencil.poly(@polytope, @center, @color.get, false, 6)
+      Canvas::Pencil.poly(@polytope, @center, @color.get, true, 6)
     end
   end
 end

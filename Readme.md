@@ -1,5 +1,6 @@
 # Volt Suite
-##### A simple 2d physics engine built to explain the systems, patterns, and algorithms of how it works.
+### A simple 2d physics engine built to see how such a thing works.
+***__This project is no longer being updated. As one might expect Ruby makes a terrible language to write a physics engine with. Lesson learned I guess. Regardless, a fun project with some valuable experience. RIP VoltSuite__***
 
 # Getting up and running
 ### Prerequisites
@@ -24,4 +25,6 @@ $ git clone https://github.com/MrAaronOlsen/VoltSuite
 $ cd VoltSuite
 $ bundle install
 ```
-That's it! If all went well you can start running example applications.
+That should do it.<br>
+To run the Contact Test Arena: `$ ruby examples/contact_tests/run.rb`<br>
+To run the GJK Visualizer: `$ ruby examples/contact_visualizer/run.rb`

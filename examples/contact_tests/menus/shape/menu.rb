@@ -9,7 +9,7 @@ module Menus
         @trans = Trans.new_translate(pos)
         @color = Canvas::Colors.white
 
-        shape_border_height = $window_height - 600
+        shape_border_height = $window_height - 100
         shape_border_width = 150
 
         @slot_increment = shape_border_height / 5

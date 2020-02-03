@@ -6,8 +6,8 @@ class Space < Element
     @world = World.new
 
     @shape_gen = Assets::Shapes::Generator
-    @shape_menu = Menus::Shape::Menu.new(V.new(100, 100))
-    @arena = Assets::Arena.new(V.new(300, 100))
+    @shape_menu = Menus::Shape::Menu.new(V.new(50, 50))
+    @arena = Assets::Arena.new(V.new(250, 50))
 
     @controller = Controller.new(window)
     @controller.add_observers(@shape_menu.get_observers)

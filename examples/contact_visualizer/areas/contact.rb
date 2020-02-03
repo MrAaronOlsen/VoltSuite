@@ -10,7 +10,7 @@ module Areas
       @shape1 = @shape2 = nil
 
       @color_off = Canvas::Colors.white
-      @color_on = Canvas::Colors.red
+      @color_on = Canvas::Colors.white
 
       @fill = false
       @z = 1
@@ -63,7 +63,7 @@ module Areas
       return if invalid?
 
       @clip_area.draw do
-        Canvas::Pencil.poly(world_verts, world_center, @color.get, @fill, @z)
+        Canvas::Pencil.poly(world_verts, world_center, @color.get, true, 3)
         @contact_data.draw
       end
     end
