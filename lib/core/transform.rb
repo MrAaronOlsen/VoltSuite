@@ -82,7 +82,7 @@ module Volt
     alias_method :compose!, :mult
 
     def *(trans)
-      Trans.new do |tr|
+      Transform.new do |tr|
         tr.a = @a * trans.a + @c * trans.b
         tr.c = @a * trans.c + @c * trans.d
         tr.tx = @a * trans.tx + @c * trans.ty + @tx

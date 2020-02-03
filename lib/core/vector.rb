@@ -22,7 +22,6 @@ module Volt
       def with_rotation(x, y, degree)
         Vector.new(x, y).tap { |vect| vect.rotate!(degree) }
       end
-
     end
 
     # Basic Math Function
