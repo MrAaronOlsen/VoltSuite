@@ -6,7 +6,7 @@ class Menu
     @trans = trans
     @spawn_pos = $window_center + spawn_pos
 
-    @color = Canvas::Colors.grey
+    @color = Canvas::Colors.white
 
     @line = PickerShapes::Line.new(slot(0), @spawn_pos, @color)
     @tri = PickerShapes::Tri.new(slot(1), @spawn_pos, @color)

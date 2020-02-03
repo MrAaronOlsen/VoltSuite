@@ -13,7 +13,9 @@ class Space
     @shape_area = Areas::Shape.new(Trans.new_translate(V.new(800, 150)))
     @contact_area = Areas::Contact.new(Trans.new_translate(V.new(50, 150)))
 
-    @drawable = [@mouse, @picker, @shape_area, @contact_area]
+    @background = GJKShapes::Background.new(V.new, $window_width, $window_height, Canvas::Color.new(80, 220, 220, 220))
+
+    @drawable = [@mouse, @picker, @shape_area, @contact_area, @background]
   end
 
   def update

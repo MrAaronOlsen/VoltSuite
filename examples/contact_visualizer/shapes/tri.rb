@@ -1,9 +1,11 @@
 module GJKShapes
-  class Tri
+  class Tri < GJKShapes::Shape
     attr_reader :shape, :body, :active
     attr_accessor :color, :fill, :z
 
     def initialize(pos)
+      super()
+
       @shape = Volt::Shape::Tri.new do |shape|
         shape.build(V.new(100, 0), V.new(200, 200), V.new(0, 200))
       end
@@ -15,10 +17,6 @@ module GJKShapes
 
       @body.build
       @body.recenter
-
-      @color = Canvas::Colors.white
-      @fill = false
-      @z = 1
 
       @active = false
     end
@@ -49,17 +47,7 @@ module GJKShapes
     end
 
     def draw
-      Canvas::Pencil.tri(world_verts, @color.get, @fill, @z)
-    end
-
-    def mouse_on
-      @fill = true
-      @z = 2
-    end
-
-    def mouse_off
-      @fill = false
-      @z = 1
+      Canvas::Pencil.tri(world_verts, @color.get, true, @z)
     end
 
     def active?

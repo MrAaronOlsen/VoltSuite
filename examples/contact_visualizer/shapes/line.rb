@@ -1,9 +1,11 @@
 module GJKShapes
-  class Line
+  class Line < GJKShapes::Shape
     attr_reader :shape, :body, :active
     attr_accessor :color, :fill, :z
 
     def initialize(pos)
+      super()
+
       @shape = Volt::Shape::Seg.new do |shape|
         shape.build(V.new(0, 0), V.new(200, 0))
       end
@@ -15,13 +17,6 @@ module GJKShapes
 
       @body.build
       @body.recenter
-
-      @color_off = Canvas::Colors.white
-      @color_on = Canvas::Colors.yellow
-      @color = @color_off
-
-      @fill = false
-      @z = 0
 
       @active = false
     end
@@ -53,18 +48,6 @@ module GJKShapes
 
     def draw
       Canvas::Pencil.line(world_verts, @color.get, @z)
-    end
-
-    def mouse_on
-      @fill = true
-      @color = @color_on
-      @z = 2
-    end
-
-    def mouse_off
-      @fill = false
-      @color = @color_off
-      @z = 1
     end
 
     def active?

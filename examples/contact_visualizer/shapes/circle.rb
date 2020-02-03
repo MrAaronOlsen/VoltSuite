@@ -1,9 +1,11 @@
 module GJKShapes
-  class Circle
+  class Circle < GJKShapes::Shape
     attr_reader :shape, :body, :active
     attr_accessor :color, :fill, :z
 
     def initialize(pos)
+      super()
+
       @shape = Volt::Shape::Circle.new do |shape|
         shape.build(V.new(0, 0), 100)
       end
@@ -15,10 +17,6 @@ module GJKShapes
 
       @body.build
       @body.recenter
-
-      @color = Canvas::Colors.white
-      @fill = false
-      @z = 1
 
       @active = false
     end
@@ -49,17 +47,7 @@ module GJKShapes
     end
 
     def draw
-      Canvas::Pencil.circle(world_center, 100, @color.get, @fill, @z)
-    end
-
-    def mouse_on
-      @fill = true
-      @z = 2
-    end
-
-    def mouse_off
-      @fill = false
-      @z = 1
+      Canvas::Pencil.circle(world_center, 100, @color.get, true, @z)
     end
 
     def active?

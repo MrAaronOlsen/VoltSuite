@@ -27,7 +27,7 @@ class Controller
       if shape.active?
         shape.deactivate
       else
-        if shape.fill
+        if shape.on_hover
           active_shapes.add(shape)
         end
       end

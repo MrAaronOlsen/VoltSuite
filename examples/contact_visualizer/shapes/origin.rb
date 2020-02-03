@@ -3,12 +3,9 @@ class Origin
   def initialize(offset)
     @offset = offset
 
-    @axis_color = Canvas::Colors.white
-    @axis_color.fade(-150)
-
-    @area_color = Canvas::Colors.white
-    @area_color.fade(-220)
-
+    @axis_color = Canvas::Colors.black
+    @area_color = Canvas::Color.new(80, 220, 220, 220)
+    @outline_color = Canvas::Colors.white
 
     @x_axis = @offset.transform_all([V.new(0, 350), V.new(700, 350)])
     @y_axis = @offset.transform_all([V.new(350, 0), V.new(350, 700)])
@@ -23,9 +20,10 @@ class Origin
   end
 
   def draw
-    Canvas::Pencil.line(@x_axis, @axis_color.get, @z)
-    Canvas::Pencil.line(@y_axis, @axis_color.get, @z)
+    Canvas::Pencil.line(@x_axis, @axis_color.get, 1)
+    Canvas::Pencil.line(@y_axis, @axis_color.get, 1)
 
     Canvas::Pencil.rect(@area, @area_color.get, true, @z)
+    Canvas::Pencil.rect(@area, @outline_color.get, false, 1)
   end
 end
