@@ -10,8 +10,9 @@ module Menus
 
           @width = width
           @height = height
+          @background = Assets::Background.new(@pos, @width, @height, Canvas::Color.new(80, 220, 220, 220))
           @color_off = Canvas::Colors.white
-          @color_on = Canvas::Colors.green
+          @color_on = Canvas::Colors.light_grey
 
           @points = trans.transform_all([V.new, V.new(width, 0), V.new(width, height), V.new(0, height)])
           @center = VectMath.average(@points)
@@ -28,6 +29,7 @@ module Menus
         end
 
         def draw
+          @background.draw
           Canvas::Pencil.rect2(@pos, @width, @height, @color.get, false, 1)
         end
 

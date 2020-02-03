@@ -9,7 +9,7 @@ module Assets
             circ.origin = origin
             circ.radius = 100
             circ.color = Canvas::Colors.white
-            circ.fill = false
+            circ.fill = true
             circ.mass = 8
             circ.moment = 500
             circ.vel = V.new(-400, -100)
@@ -36,7 +36,7 @@ module Assets
             pol.height = 200
             pol.width = 200
             pol.color = Canvas::Colors.white
-            pol.fill = false
+            pol.fill = true
             pol.mass = 15
             pol.moment = 500
             pol.vel = V.new(-100, -10)
@@ -50,7 +50,7 @@ module Assets
             rec.width = 200
             rec.height = 200
             rec.color = Canvas::Colors.white
-            rec.fill = false
+            rec.fill = true
             rec.mass = 15
             rec.moment = 500
             rec.vel = V.new(-100, -10)
@@ -63,7 +63,7 @@ module Assets
             pol.origin = origin
             pol.radius = 100
             pol.color = Canvas::Colors.white
-            pol.fill = false
+            pol.fill = true
             pol.mass = 15
             pol.moment = 500
             pol.vel = V.new(-100, -10)

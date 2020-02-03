@@ -6,8 +6,8 @@ class Mouse
 
     @trans = Trans.new_translate(get_pos)
 
-    @color = Canvas::Colors.grey
-    @fill = true
+    @fill_color = Canvas::Colors.black
+    @outline_color = Canvas::Colors.white
     @z = 999
   end
 
@@ -20,7 +20,8 @@ class Mouse
   end
 
   def draw
-    Canvas::Pencil.tri(@trans.transform_all(@shape), @color.get, @fill, @z)
+    Canvas::Pencil.tri(@trans.transform_all(@shape), @fill_color.get, true, 998)
+    Canvas::Pencil.tri(@trans.transform_all(@shape), @outline_color.get, false, 999)
   end
 
   def get_support

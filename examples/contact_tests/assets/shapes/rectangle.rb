@@ -1,6 +1,6 @@
 module Assets
   module Shapes
-    class Rectangle < Element
+    class Rectangle < Shapes::Shape
       attr_reader :shape, :body
       attr_accessor :origin, :width, :height
       attr_accessor :color, :fill, :z
@@ -8,7 +8,7 @@ module Assets
 
       def initialize
         super()
-        
+
         @z = 1
         @mass, @moment, @vel, @a_vel = 0, 0, V.new(0, 0), 0
         @damp = 0.998
@@ -46,7 +46,7 @@ module Assets
       end
 
       def update(space)
-        has_message("on_hover") ? @fill = true : @fill = false
+        has_message("on_hover") ? @color = @color_on : @color = @color_off
 
         if has_messages("on_hover", Gosu::MS_LEFT)
           Message::Queue.add_message(Message.new(space, self, "destroy"))

@@ -1,6 +1,6 @@
 module Assets
   module Shapes
-    class Segment < Element
+    class Segment < Shapes::Shape
       attr_reader :shape, :body
       attr_accessor :origin, :line
       attr_accessor :color, :z, :recenter
@@ -13,9 +13,6 @@ module Assets
         @mass, @moment, @vel, @a_vel = 0, 0, V.new(0, 0), 0
         @damp = 0.998
         @recenter = false
-
-        @color_on = Canvas::Colors.yellow
-        @color_off = Canvas::Colors.white
 
         yield(self)
         build

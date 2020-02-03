@@ -1,6 +1,6 @@
 module Assets
   module Shapes
-    class Circle < Element
+    class Circle < Shapes::Shape
       attr_reader :shape, :body
       attr_accessor :origin, :radius
       attr_accessor :color, :fill, :z
@@ -45,7 +45,7 @@ module Assets
       end
 
       def update(space)
-        has_message("on_hover") ? @fill = true : @fill = false
+        has_message("on_hover") ? @color = @color_on : @color = @color_off
 
         if has_messages("on_hover", Gosu::MS_LEFT)
           Message::Queue.add_message(Message.new(space, self, "destroy"))

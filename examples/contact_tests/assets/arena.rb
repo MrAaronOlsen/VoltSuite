@@ -3,7 +3,7 @@ module Assets
 
     def initialize(pos)
       @pos = pos
-      @color = Canvas::Colors.green
+      @color = Canvas::Colors.white
       @walls = []
 
       set_corners
@@ -46,12 +46,15 @@ module Assets
         seg.line = V.new(0, -@height)
         seg.color = @color
       end
+
+      @background = Background.new(@pos, @width, @height, Canvas::Color.new(80, 220, 220, 220))
     end
 
     def update(space)
     end
 
     def draw
+      @background.draw
       @walls.each { |wall| wall.draw }
     end
 

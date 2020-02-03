@@ -15,6 +15,8 @@ class Space < Element
     @assets = [@arena, @shape_menu, @controller]
     @world.add_bodies(@arena.bodies)
 
+    @background = Assets::Background.new(V.new, $window_width, $window_height, Canvas::Color.new(80, 220, 220, 220))
+
     @dt = 1.0/60.0
   end
 
@@ -45,6 +47,7 @@ class Space < Element
   end
 
   def draw
+    @background.draw
     @assets.each { |asset| asset.draw }
   end
 

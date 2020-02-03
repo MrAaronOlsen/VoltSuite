@@ -12,8 +12,10 @@ require_relative 'messaging/queue.rb'
 require_relative 'elements/messaging.rb'
 require_relative 'elements/element.rb'
 
+require_relative 'assets/background.rb'
 require_relative 'assets/arena.rb'
 
+require_relative 'assets/shapes/shape.rb'
 require_relative 'assets/shapes/circle.rb'
 require_relative 'assets/shapes/segment.rb'
 require_relative 'assets/shapes/triangle.rb'
