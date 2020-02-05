@@ -5,9 +5,11 @@ module Canvas
           axis1 = Vector.new(radius, 0)
       		axis2 = Vector.new(radius, 0)
 
+          sides = 15
+          rot = 360 / sides
 
-      		60.times do
-      			axis2.rotate!(6)
+      		sides.times do
+      			axis2.rotate!(rot)
 
             v1 = axis1 + center
             v2 = axis2 + center
@@ -18,7 +20,7 @@ module Canvas
               line([v1, v2], color, z )
             end
 
-      			axis1.rotate!(6)
+      			axis1.rotate!(rot)
       		end
       end
 

@@ -5,9 +5,12 @@ class Mouse
   def initialize(window)
     @window = window
 
+    @trans = Transform.new_rotate(-20)
     @shape = get_shape
 
-    @color = Canvas::Colors.white
+    @color_fill = Canvas::Colors.black
+    @color_ouline = Canvas::Colors.white
+
     @fill = true
     @z = 999
   end
@@ -19,11 +22,12 @@ class Mouse
   end
 
   def get_shape
-    [V.new(0, 0), V.new(10, 30), V.new(-10, 30)]
+    @trans.transform_all([V.new(0, 0), V.new(7, 25), V.new(-7, 25)])
   end
 
   def draw
-    Canvas::Pencil.tri(get_mouse, @color.get, @fill, @z)
+    Canvas::Pencil.tri(get_mouse, @color_fill.get, true, @z)
+    Canvas::Pencil.tri(get_mouse, @color_ouline.get, false, @z)
   end
 
   def set_offset(pos)

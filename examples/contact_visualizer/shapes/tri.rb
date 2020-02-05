@@ -7,7 +7,7 @@ module GJKShapes
       super()
 
       @shape = Volt::Shape::Tri.new do |shape|
-        shape.build(V.new(100, 0), V.new(200, 200), V.new(0, 200))
+        shape.build(V.new(@width / 2, 0), V.new(@width, @height), V.new(0, @height))
       end
 
       @body = Body.new do |b|

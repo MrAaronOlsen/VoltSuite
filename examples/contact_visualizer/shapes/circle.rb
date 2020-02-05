@@ -7,7 +7,7 @@ module GJKShapes
       super()
 
       @shape = Volt::Shape::Circle.new do |shape|
-        shape.build(V.new(0, 0), 100)
+        shape.build(V.new(0, 0), @width / 2)
       end
 
       @body = Body.new do |b|
@@ -47,7 +47,7 @@ module GJKShapes
     end
 
     def draw
-      Canvas::Pencil.circle(world_center, 100, @color.get, true, @z)
+      Canvas::Pencil.circle(world_center, @width / 2, @color.get, true, @z)
     end
 
     def active?

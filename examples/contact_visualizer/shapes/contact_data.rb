@@ -4,11 +4,12 @@ class ContactData
     @offset = offset
 
     @assets = [
-      ContactPoints.new(@offset),
       Simplex.new(@offset),
       Polytope.new(@offset),
       ContactNormal.new(@offset)
     ]
+
+    @contact_points = ContactPoints.new(@offset);
 
     @draw = false
   end
@@ -16,6 +17,9 @@ class ContactData
   def prep(manifold)
     if @draw = manifold.solve
       @assets.each { |asset| asset.update(manifold) }
+      @contact_points.update(manifold)
+    else
+      clear
     end
   end
 
@@ -25,6 +29,10 @@ class ContactData
 
   def draw
     @assets.each { |asset| asset.draw } if @draw
+  end
+
+  def draw_contact_points
+    @contact_points.draw if @draw
   end
 
   # Helper Classes
@@ -40,7 +48,7 @@ class ContactData
     end
 
     def draw
-      @points.each { |point| Canvas::Pencil.circle(point, 10, @color.get, true, 9) }
+      @points.each { |point| Canvas::Pencil.circle(point, 6, @color.get, true, 9) }
     end
   end
 

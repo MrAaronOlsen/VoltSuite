@@ -4,9 +4,12 @@ module Areas
     attr_accessor :color, :fill, :z
 
     def initialize(offset)
-      @clip_area = ClipArea.new(offset.transform(V.new), 700, 700)
+      @width = 400
+      @height = 400
 
-      @origin = Origin.new(offset)
+      @clip_area = ClipArea.new(offset.transform(V.new), @width, @height)
+
+      @origin = Origin.new(offset, @width, @height)
       @shape1 = @shape2 = nil
 
       @color_off = Canvas::Colors.white
@@ -23,6 +26,7 @@ module Areas
 
     def update
       return if invalid?
+
       @manifold = Volt::Contact::Manifold.new(@shape1.get_support, @shape2.get_support)
 
       if @manifold.pre_solve
@@ -66,6 +70,8 @@ module Areas
         Canvas::Pencil.poly(world_verts, world_center, @color.get, true, 3)
         @contact_data.draw
       end
+
+      @contact_data.draw_contact_points
     end
 
     def set_shapes(shape1, shape2)

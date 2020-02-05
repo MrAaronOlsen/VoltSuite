@@ -13,7 +13,7 @@ module PickerShapes
     end
 
     def centered_poly
-      verts = [V.new(5, 0), V.new(30, 10), V.new(45, 30), V.new(50, 50), V.new(10, 40), V.new(0, 30)]
+      verts = GJKShapes::Poly.make_poly(30, 8)
 
       @center = VectMath.area_average(verts)
       verts.map { |vert| @center - vert }

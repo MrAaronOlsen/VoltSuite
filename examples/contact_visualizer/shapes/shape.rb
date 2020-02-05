@@ -7,6 +7,9 @@ module GJKShapes
       @color_on = Canvas::Colors.yellow
       @color_off = Canvas::Colors.white
 
+      @width = 75
+      @height = 75
+
       @on_hover = false
       @z = 1
     end

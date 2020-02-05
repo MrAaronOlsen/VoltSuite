@@ -3,19 +3,28 @@ class Space
 
   def initialize(window)
     @controller = Controller.new(self)
-    @picker = Picker.new
 
     @gjk = Contact::GJK.new
     @shapes = [nil, nil]
 
     @mouse = Mouse.new(window)
 
-    @shape_area = Areas::Shape.new(Trans.new_translate(V.new(800, 150)))
-    @contact_area = Areas::Contact.new(Trans.new_translate(V.new(50, 150)))
+    @shape_area = Areas::Shape.new(Trans.new_translate(V.new(475, 125)))
+    @clip_area = ClipArea.new(@shape_area.origin, @shape_area.width, @shape_area.height)
+
+    @picker = Picker.new(@shape_area)
+
+    @contact_area = Areas::Contact.new(Trans.new_translate(V.new(50, 200)))
 
     @background = GJKShapes::Background.new(V.new, $window_width, $window_height, Canvas::Color.new(80, 220, 220, 220))
 
-    @drawable = [@mouse, @picker, @shape_area, @contact_area, @background]
+    @drawable = [
+      @mouse,
+      @picker,
+      @shape_area,
+      @contact_area,
+      @background
+    ]
   end
 
   def update
@@ -30,7 +39,7 @@ class Space
   def draw
     @drawable.each { |shape| shape.draw }
 
-    Gosu.clip_to(800, 150, 850, 1000) do
+    @clip_area.draw do
       @shapes.each { |shape| shape.draw if shape }
     end
   end

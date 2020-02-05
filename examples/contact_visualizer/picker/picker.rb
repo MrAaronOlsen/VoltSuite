@@ -1,12 +1,12 @@
 class Picker
   attr_reader :selection
 
-  def initialize
-    menu1_trans = Trans.new_translate(V.new($window_width - 650, 50))
-    @menu1 = Menu.new(menu1_trans, V.new(100, 50), 0)
+  def initialize(shape_area)
+    menu1_trans = Trans.new_translate(V.new(375, 25))
+    @menu1 = Menu.new(menu1_trans, shape_area.spawn_ul, 0)
 
-    menu2_trans = Trans.new_transform(V.new($window_width - 50, 150), 90)
-    @menu2 = Menu.new(menu2_trans, V.new(600, 50), 1)
+    menu2_trans = Trans.new_transform(V.new(975, 125), 90)
+    @menu2 = Menu.new(menu2_trans, shape_area.spawn_lr, 1)
 
     @menus = [@menu1, @menu2]
     @selection = ActiveSelection.new

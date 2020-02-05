@@ -4,7 +4,7 @@ class Menu
   def initialize(trans, spawn_pos, index)
     @index = index
     @trans = trans
-    @spawn_pos = $window_center + spawn_pos
+    @spawn_pos = spawn_pos
 
     @color = Canvas::Colors.white
 

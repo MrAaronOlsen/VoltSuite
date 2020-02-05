@@ -4,6 +4,8 @@ def require_all(folder)
 	end
 end
 
+require 'stackprof'
+
 require_relative '../manifest.rb'
 
 require_relative 'controller.rb'

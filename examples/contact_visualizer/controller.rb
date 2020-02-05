@@ -13,8 +13,8 @@ class Controller
   end
 
   def update
-    rotate_active_shape(1) if Gosu.button_down?(Gosu::KbRight)
-    rotate_active_shape(-1) if Gosu.button_down?(Gosu::KbLeft)
+    rotate_active_shape(2) if Gosu.button_down?(Gosu::KbRight)
+    rotate_active_shape(-2) if Gosu.button_down?(Gosu::KbLeft)
   end
 
   def check_active_shapes

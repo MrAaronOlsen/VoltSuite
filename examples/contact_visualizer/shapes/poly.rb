@@ -7,7 +7,7 @@ module GJKShapes
       super()
 
       @shape = Volt::Shape::Poly.new do |shape|
-        shape.build([V.new(20, 0), V.new(120, 40), V.new(180, 120), V.new(200, 200), V.new(40, 160), V.new(0, 120)])
+        shape.build(Poly.make_poly(@width / 2, rand(5..12)))
       end
 
       @body = Body.new do |b|
@@ -60,6 +60,20 @@ module GJKShapes
 
     def deactivate
       @active = false
+    end
+
+    class << self
+      def make_poly(radius, num_points)
+        angle = 360 / num_points
+        axis = Vector.new(0, -radius)
+
+        Array.new.tap do |a|
+          num_points.times do |i|
+            axis.rotate!(angle)
+            a.push(axis.copy)
+          end
+        end
+      end
     end
   end
 end
